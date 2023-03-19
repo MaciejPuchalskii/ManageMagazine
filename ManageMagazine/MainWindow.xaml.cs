@@ -35,7 +35,7 @@ namespace ManageMagazine
         {
             try
             {
-                Close();
+                this.Close();
             }
             catch(Exception ex)
             {
@@ -63,7 +63,6 @@ namespace ManageMagazine
             try
             {
                 LoginWindow loginWindow = new LoginWindow();
-                this.Hide();
                 loginWindow.ShowDialog();
             }
             catch (Exception ex)
@@ -71,10 +70,17 @@ namespace ManageMagazine
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
+
 
         #endregion
 
-
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
     }
 }

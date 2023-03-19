@@ -48,16 +48,16 @@
 
         <!--#region LoginWindow Styles-->
 
-        <Style x:Key="loginButtons" TargetType="Button">
+        <Style x:Key="registerButton" TargetType="Button">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Width" Value="170"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#fdfefe"/>
+            <Setter Property="Background" Value="#fdfefe" />
+            <Setter Property="Foreground" Value="#46EFAF" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="25" Margin="0 100 0 0" BorderThickness="1" BorderBrush="white" Padding="15">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="25"  BorderThickness="1" BorderBrush="#46EFAF" Padding="15">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                         </Border>
@@ -67,22 +67,68 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="White"/>
-                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="#31a77a"/>
+                    <Setter Property="Foreground" Value="White"/>
                 </Trigger>
                 <Trigger Property="IsMouseCaptured" Value="True">
-                    <Setter Property="Background" Value="White"/>
-                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="#31a77a"/>
+                    <Setter Property="Foreground" Value="White"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
 
 
+        <Style x:Key="textHint" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Panel.ZIndex" Value="1"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="Foreground" Value="#acb0af"/>
+
+        </Style>
+
+        <Style x:Key="textBox" TargetType="Control">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Background" Value="#DFFBF0"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="Foreground" Value="#878787"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style x:Key="mainloginButtons" TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Margin" Value="0 20 0 0"/>
+            <Setter Property="Background" Value="#46EFAF"/>
+            <Setter Property="Foreground" Value="#fdfefe"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="25"  BorderThickness="1" BorderBrush="#46EFAF" Padding="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background"  Value="#31a77a"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background"  Value="#31a77a"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <!--#endregion-->
 
         <!--#region Common Styles-->
             <SolidColorBrush x:Key="MainColorBrush" Color="#46EFAF"/>
-
+        <!--#region Close Minimalize buttons -->
         <Style TargetType="Button" x:Key="ClosingMinimalizeButton">
             <Setter Property="Width" Value="30"/>
             <Setter Property="Background" Value="Black"/>
@@ -108,11 +154,31 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <!--#endregion-->
 
+        <!--#region icons label -->
         <Style TargetType="Label" x:Key="MenuIconsLabel">
             <Setter Property="FontFamily" Value="Resources/#Font Awesome 6 Free Solid"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
+        <!--#endregion-->
+
+        <!--#region Text styles -->
+
+        <Style x:Key="titleText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="normalText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="LineHeight" Value="28"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+        <!--#endregion-->
 
         <!--#endregion-->
 

@@ -8,16 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Email.png" />
+    <None Remove="Images\Lock.png" />
     <None Remove="Images\user.svg" />
     <None Remove="logo.png" />
     <None Remove="Resources\Font Awesome 6 Free Solid.otf" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\logo.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    <Resource Include="Images\Email.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\user.svg">
+    <Resource Include="Images\Lock.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\logo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Font Awesome 6 Free Solid.otf">

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ManageMagazine"
         mc:Ignorable="d"
        Title="LoginWindow" Height="700" Width="1100" WindowStyle="None" WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent">
+        ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent" MouseDown="Window_MouseDown">
     <Grid>
         
         <!--#region  Row Definitions-->
@@ -23,8 +23,9 @@
                     <!-- Logo-->
                     <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
                         <Image Source="Images/logo.png" Width="75" VerticalAlignment="Center" Margin="10"/>
-                        <TextBlock Text="WareMaster" FontSize="40" Foreground="White" VerticalAlignment="Center" FontStyle="Italic"/>
-                        <Button Content="Sign up" Style="{StaticResource loginButtons}"> </Button>
+                        <TextBlock Text="WareMaster"  Foreground="White" Style="{StaticResource titleText}" FontStyle="Italic"/>
+                        <TextBlock Margin="0 20 0 0" Text="Create new account to manage your store" Opacity="0.8" Foreground="White" Style="{StaticResource normalText}" FontStyle="Italic"/>
+                    <Button Content="Sign up" Margin="0 50 0 0" Style="{StaticResource registerButton}"> </Button>
                     </StackPanel>
           
                 </Grid>
@@ -34,28 +35,64 @@
         <!--#endregion-->
 
         <!--#region RIGHT-->
-            <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Background="#DFFBF0" CornerRadius="0 10 10 0">
+            <Border Grid.Column="1" Grid.Row="0"  Background="#DFFBF0" CornerRadius="0 10 10 0">
+            <Grid>
+                <!--#region User/Minimalize/Exit -->
+                <StackPanel HorizontalAlignment="Right" Height="30"  Orientation="Horizontal" VerticalAlignment="Top">
 
-            <!--#region User/Minimalize/Exit -->
-            <StackPanel HorizontalAlignment="Right" Height="30"  Orientation="Horizontal" VerticalAlignment="Top">
+                    <Button Style="{StaticResource ClosingMinimalizeButton}"  Click="MinimalizeButtonClick" >
+                        <Label Content="&#xf2d1;"  Style="{StaticResource MenuIconsLabel}" FontSize="10"/>
+                    </Button>
+                    <Button Style="{StaticResource ClosingMinimalizeButton}"  Click="CloseButtonClick">
+                        <Label Content="&#xf00d;" Style="{StaticResource MenuIconsLabel}" FontSize="20"/>
+                    </Button>
+                </StackPanel>
+                    <!--#endregion-->
 
-                <Button Style="{StaticResource ClosingMinimalizeButton}"  Click="MinimalizeButtonClick" >
-                    <Label Content="&#xf2d1;"  Style="{StaticResource MenuIconsLabel}" FontSize="10"/>
-                </Button>
-                <Button Style="{StaticResource ClosingMinimalizeButton}"  Click="CloseButtonClick">
-                    <Label Content="&#xf00d;" Style="{StaticResource MenuIconsLabel}" FontSize="20"/>
-                </Button>
-            </StackPanel>
-                <!--#endregion-->
+                <!--#region LOGIN-->
 
-            <!--#region LOGIN-->
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Sign in to App" Foreground="{StaticResource MainColorBrush}"  Style="{StaticResource titleText}"/>
+
+                    <TextBlock Text="Use your login:" Style="{StaticResource normalText}" Margin="0 30 0 0" Foreground="{StaticResource MainColorBrush}"/>
+
+                    <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/Email.png" Height="20"/>
+                            <TextBlock x:Name="textEmail" MouseDown="textEmail_MouseDown" Text="Email" Style="{StaticResource textHint }" />
+                            
+                            <TextBox x:Name="txtEmail" TextChanged="txtEmail_TextChanged" Text="{x:Null}" Style="{StaticResource textBox}"/>
+                        </Grid>
+                    </Border>
+                    
+                    <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/Lock.png" Height="20"/>
+                            <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown"  Text="Password" Style="{StaticResource textHint }"/>
+                            <PasswordBox x:Name="txtPassword" PasswordChanged ="txtPassword_PasswordChanged" Style="{StaticResource textBox}"/>
+
+
+                        </Grid>
+                    </Border>
+                            <Button Content="Sign In" Click="Button_Click" Style="{StaticResource mainloginButtons}"/>
+                    
+                </StackPanel>
                 
                 
-                
-                
-                
+
+
              <!--#endregion-->
-
+            </Grid>
         </Border>
 
         <!--#endregion-->
