@@ -96,9 +96,17 @@ namespace ManageMagazine
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_Open_Menu(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                MainWindow mainWindow = new();
+                mainWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

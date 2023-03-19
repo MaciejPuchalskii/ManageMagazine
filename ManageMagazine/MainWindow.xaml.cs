@@ -57,13 +57,63 @@ namespace ManageMagazine
             }
         }
 
-        // Navigation User -> MainWindow / MainWindow -> User
-        private void NavigationButton(object sender, RoutedEventArgs e)
+      
+        
+        private void SalesNavigation(object sender, RoutedEventArgs e)
         {
             try
             {
-                LoginWindow loginWindow = new LoginWindow();
-                loginWindow.ShowDialog();
+                SaleWindow saleWindow = new();
+                saleWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void ProductsNavigation(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ProductsWindow productsWindow = new();
+                productsWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void CustomersNavigation(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                CustomersWindow customerWindow = new();
+                customerWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void UserNavigation(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                UserWindow userWindow = new();
+                userWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void HomeNavigation(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                HomeWindow homeWindow = new();
+                homeWindow.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -81,6 +131,12 @@ namespace ManageMagazine
             {
                 this.DragMove();
             }
+        }
+
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
