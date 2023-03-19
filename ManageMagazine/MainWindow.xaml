@@ -6,75 +6,77 @@
         xmlns:local="clr-namespace:ManageMagazine"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1100" WindowStyle="None" WindowStartupLocation="CenterScreen"
-        ResizeMode="CanResizeWithGrip" AllowsTransparency="True" >
+        ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent">
     <Grid>
-        
+
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        
-        
-        
-        <!-- Header  -->
-        <Grid  Grid.Row="0" Grid.ColumnSpan="3"  Background="#46EFAF">
-            <!-- Logo-->
-            <StackPanel  HorizontalAlignment="Left"  Orientation="Horizontal">
-                <Image Source="Images/logo.png" Width="75" VerticalAlignment="Center" Margin="10"/>
-                <TextBlock Text="WareMaster" FontSize="40" Foreground="White" VerticalAlignment="Center" FontStyle="Italic"/>
-            </StackPanel>
 
-            <!-- User/Minimalize/Exit -->
-            <StackPanel HorizontalAlignment="Right" Height="30"  Orientation="Horizontal" VerticalAlignment="Top">
-                
-                <Button Width="30" Background="Black" Click="MinimalizeButtonClick" >
-                    <Label Content="&#xf2d1;" Foreground="White" FontFamily="Resources/#Font Awesome 6 Free Solid"/>
-                </Button>
-                <Button Width="30" Background="Black" Click="CloseButtonClick">
-                    <Label Content="&#xf00d;" Foreground="White" FontFamily="Resources/#Font Awesome 6 Free Solid"/>
-                </Button>
-            </StackPanel>
+
+
+        <Border CornerRadius="10 0 0 0"  Background="{StaticResource MainColorBrush}">
             
-        </Grid>
-        
-        <!-- Menu -->
-        <Grid Grid.Row="1" Background="#DFFBF0" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <!-- Header  -->
+            <Grid   Grid.Row="0" Grid.ColumnSpan="3">
+                <!-- Logo-->
+                <StackPanel  HorizontalAlignment="Left"  Orientation="Horizontal">
+                    <Image Source="Images/logo.png" Width="75" VerticalAlignment="Center" Margin="10"/>
+                    <TextBlock Text="WareMaster" FontSize="40" Foreground="White" VerticalAlignment="Center" FontStyle="Italic"/>
+                </StackPanel>
 
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+                <!-- User/Minimalize/Exit -->
+                <StackPanel HorizontalAlignment="Right" Height="30"  Orientation="Horizontal" VerticalAlignment="Top">
+
+                    <Button Style="{StaticResource ClosingMinimalizeButton}"  Click="MinimalizeButtonClick" >
+                        <Label Content="&#xf2d1;"  Style="{StaticResource MenuIconsLabel}" FontSize="10"/>
+                    </Button>
+                    <Button Style="{StaticResource ClosingMinimalizeButton}"  Click="CloseButtonClick">
+                        <Label Content="&#xf00d;" Style="{StaticResource MenuIconsLabel}" FontSize="20"/>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" CornerRadius="0 0 10 10" Background="#DFFBF0" >
             
-            <Button Grid.Row="0" BorderThickness="0" Grid.Column="0" Background="#46EFAF" Height="250" Width="250">
-                <Label FontSize="100" Content="&#xf015;" Foreground="White" FontFamily="Resources/#Font Awesome 6 Free Solid"/>
-            </Button>
-            <Button Grid.Row="0" BorderThickness="0" Grid.Column="1" Background="#46EFAF"  Height="250" Width="250">
-                <Label FontSize="100" Content="&#xe529;" Foreground="White" FontFamily="Resources/#Font Awesome 6 Free Solid"/>
-            </Button>
-            <Button Grid.Row="0" BorderThickness="0" Grid.Column="2" Background="#46EFAF"  Height="250" Width="250">
-                <Label  FontSize="100" Content="&#xf468;" Foreground="White" FontFamily="Resources/#Font Awesome 6 Free Solid"/>
-            </Button>
-            <Button Grid.Row="1" BorderThickness="0" Grid.Column="0" Background="#46EFAF"  Height="250" Width="250">
-                <Label FontSize="100" Content="&#xf0c0;" Foreground="White" FontFamily="Resources/#Font Awesome 6 Free Solid"/>
-            </Button>
-            <Button Grid.Row="1" BorderThickness="0" Grid.Column="1" Background="#46EFAF"  Height="250" Width="250">
-                <Label FontSize="100" Content="&#xf007;" Foreground="White" FontFamily="Resources/#Font Awesome 6 Free Solid"/>
-            </Button>
-            <Button Grid.Row="1" BorderThickness="0" Grid.Column="2" Background="#46EFAF"  Height="250" Width="250">
-                <Label FontSize="90" Content="&#xf08b;" Foreground="White" FontFamily="Resources/#Font Awesome 6 Free Solid"/>
-            </Button>
+            <!-- Menu -->
+            <Grid  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource MenuButton}">
+                    <Label Content="&#xf015;" Style="{StaticResource MenuIconsLabel}"/>
+                </Button>
+                <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource MenuButton}">
+                    <Label Content="&#xe529;" Style="{StaticResource MenuIconsLabel}"/>
+                </Button>
+                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource MenuButton}">
+                    <Label Content="&#xf468;" Style="{StaticResource MenuIconsLabel}"/>
+                </Button>
+                <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource MenuButton}">
+                    <Label Content="&#xf0c0;" Style="{StaticResource MenuIconsLabel}"/>
+                </Button>
+                <Button Click="NavigationButton" Grid.Row="1" Grid.Column="1" Style="{StaticResource MenuButton}">
+                    <Label Content="&#xf007;" Style="{StaticResource MenuIconsLabel}"/>
+                </Button>
+                <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource MenuButton}">
+                    <Label Content="&#xf08b;" Style="{StaticResource MenuIconsLabel}"/>
+                </Button>
+            </Grid>
+        </Border>
 
 
-        </Grid>
-        
-        
-        
+
     </Grid>
 </Window>

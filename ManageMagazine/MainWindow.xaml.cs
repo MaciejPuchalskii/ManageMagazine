@@ -23,7 +23,7 @@ namespace ManageMagazine
         public MainWindow()
         {
             InitializeComponent();
-            
+
         }
 
         #region ClosingMinimalizingApp
