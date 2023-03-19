@@ -9,17 +9,16 @@
         ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent">
     <Grid>
 
-
+        <!--#region  Row Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <!--#endregion-->
 
-
-
+        <!--#region  Header-->
         <Border CornerRadius="10 0 0 0"  Background="{StaticResource MainColorBrush}">
-            
-            <!-- Header  -->
             <Grid   Grid.Row="0" Grid.ColumnSpan="3">
                 <!-- Logo-->
                 <StackPanel  HorizontalAlignment="Left"  Orientation="Horizontal">
@@ -40,9 +39,14 @@
 
             </Grid>
         </Border>
+
+        <!--#endregion-->
+
+        <!--#region MAIN MENU-->
+        
         <Border Grid.Row="1" CornerRadius="0 0 10 10" Background="#DFFBF0" >
+
             
-            <!-- Menu -->
             <Grid  >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -54,7 +58,9 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-
+                    
+                <!-- Buttons -->
+                
                 <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource MenuButton}">
                     <Label Content="&#xf015;" Style="{StaticResource MenuIconsLabel}"/>
                 </Button>
@@ -75,8 +81,8 @@
                 </Button>
             </Grid>
         </Border>
-
-
+        
+        <!--#endregion-->
 
     </Grid>
 </Window>

@@ -41,10 +41,7 @@
 
         
         
-        <Style TargetType="Label" x:Key="MenuIconsLabel">
-            <Setter Property="FontFamily" Value="Resources/#Font Awesome 6 Free Solid"/>
-            <Setter Property="Foreground" Value=" White"/>
-        </Style>
+
         
         
         <!--#endregion-->
@@ -86,11 +83,36 @@
         <!--#region Common Styles-->
             <SolidColorBrush x:Key="MainColorBrush" Color="#46EFAF"/>
 
-            <Style TargetType="Button" x:Key="ClosingMinimalizeButton">
-                <Setter Property="Width" Value="30"/>
-                <Setter Property="Background" Value="Black"/>
-            </Style>
+        <Style TargetType="Button" x:Key="ClosingMinimalizeButton">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#6af2bf"/>
 
+
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#6af2bf"/>
+
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Label" x:Key="MenuIconsLabel">
+            <Setter Property="FontFamily" Value="Resources/#Font Awesome 6 Free Solid"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
 
         <!--#endregion-->
 
