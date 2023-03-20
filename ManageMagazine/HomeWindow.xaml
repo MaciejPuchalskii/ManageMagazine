@@ -57,23 +57,42 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-
+        
+                <!--#region SALE-->
                 <Border Grid.Row="0" Grid.Column="0" Margin="30" Background="#90f5cf" CornerRadius="20" BorderThickness="0">
-                    <StackPanel VerticalAlignment="Center" Height="200" Margin="30">
-                        <TextBlock HorizontalAlignment="Center"  Margin="0 0 0 10"  Text="Sales" Style="{StaticResource titleText}" TextAlignment="Center" Foreground="White"/>
-                        <TextBlock VerticalAlignment="Center" FontSize="30" Margin="0 0 0 20"  Text="Today's Sale: 20 $" Style="{StaticResource normalText}" TextAlignment="Center" Foreground="White"/>
-                        <TextBlock FontSize="30" Text="Total Sale:    300 $" Style="{StaticResource normalText}" TextAlignment="Center" Foreground="White"/>
-
-                    </StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="AUTO"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"  Orientation="Horizontal" VerticalAlignment="Top">
+                            <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"  Height="40" >
+                                <TextBlock  Text="SALE" Foreground="White" FontSize="30" Style="{StaticResource normalText}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="70 0" Height="20">
+                                <RadioButton Margin="10 0 10 0" Content="LAST 7 DAYS"/>
+                                <RadioButton Margin="10 0 10 0" Content="LAST 30 DAYS"/>
+                                <RadioButton Margin="10 0 10 0" Content="LAST 365 DAYS"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Row="1">
+                            <TextBlock Text="Turnover: 10 000$" Style="{StaticResource normalText}" Margin="10 10 0 0" FontSize="25" HorizontalAlignment="Left"  Foreground="White"/>
+                            <TextBlock Text="Cost: 3 000$" Style="{StaticResource normalText}" Margin="10 10 0 0"  FontSize="25" HorizontalAlignment="Left"  Foreground="White"/>
+                            <TextBlock Text="Taxes: 400$" Style="{StaticResource normalText}" Margin="10 10 0 0"  FontSize="25" HorizontalAlignment="Left"  Foreground="White"/>
+                            <TextBlock Text="Profit: 6 600$" Style="{StaticResource normalText}" Margin="10 10 0 0"  FontSize="25" HorizontalAlignment="Left"  Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
                 </Border>
-
-                <Border Grid.Row="0" Grid.Column="1"  CornerRadius="20" BorderThickness="0">
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock HorizontalAlignment="Center"  Margin="0 0 0 10"  Text="Wykresik" Style="{StaticResource titleText}" TextAlignment="Center" Foreground="White"/>
+                <!--#endregion-->
+                
+                <!--#region Graph-->
+                <Border   Background="White"  Margin="30" Grid.Row="1" Grid.Column="0"  CornerRadius="20" BorderThickness="0">
+                    <StackPanel VerticalAlignment="Center" >
+                        <TextBlock HorizontalAlignment="Center"  Margin="0 0 0 10"  Text="Wykres" Style="{StaticResource titleText}" TextAlignment="Center" Foreground="Black"/>
                    
                     </StackPanel>
                 </Border>
-                
+                <!--#endregion-->
                 
                 <Border Grid.Row="1" Grid.Column="0"  CornerRadius="20" BorderThickness="0">
                     <StackPanel VerticalAlignment="Center">
@@ -81,13 +100,27 @@
                     </StackPanel>
                 </Border>
                 
-                <Border Grid.Row="1" Grid.Column="1" Margin="30" Background="#90f5cf" CornerRadius="20" BorderThickness="0">
-                    <StackPanel VerticalAlignment="Center" Height="200" Margin="30">
-                        <TextBlock HorizontalAlignment="Center"  Margin="0 0 0 10"  Text="Last Items in Stock " Style="{StaticResource titleText}" TextAlignment="Center" Foreground="White"/>
-                        <TextBlock  FontSize="20" Margin="0 0 0 10"  Text="Car Spray Red: 2 QTY" Style="{StaticResource normalText}" TextAlignment="Left" Foreground="White"/>
-                        <TextBlock  FontSize="20" Margin="0 0 0 10"  Text="Car Spray Blue: 1 QTY" Style="{StaticResource normalText}" TextAlignment="Left" Foreground="White"/>
-                        <TextBlock  FontSize="20" Margin="0 0 0 10"  Text="Car Spray Grey: 0 QTY" Style="{StaticResource normalText}" TextAlignment="Left" Foreground="White"/>
+                <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="30" Background="#90f5cf" CornerRadius="20" BorderThickness="0">
+                    <StackPanel>
+                    <TextBlock Text="LAST ITEMS" Margin="20" Style="{StaticResource titleText}" Foreground="White"/>
+                    <ListView x:Name="LastProductsListView" Margin="20 20 20 100" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
+                        <ListView.View>
+                            <GridView>
 
+                                <GridView.ColumnHeaderContainerStyle>
+                                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </Style>
+                                </GridView.ColumnHeaderContainerStyle>
+
+                                <GridViewColumn Width="80" Header="ID" DisplayMemberBinding="{Binding Id}" />
+                                <GridViewColumn Width="160"  Header="Name" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Width="140" Header="Quantity" DisplayMemberBinding="{Binding Quantity}" />
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                        
                     </StackPanel>
                 </Border>
 

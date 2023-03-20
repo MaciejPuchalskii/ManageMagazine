@@ -21,6 +21,7 @@ namespace ManageMagazine
         {
             InitializeComponent();
             ProductsListView.ItemsSource = productList;
+
         }
 
 
@@ -67,7 +68,7 @@ namespace ManageMagazine
         #endregion
 
 
-        List<Product> productList = new List<Product>()
+         List<Product> productList = new List<Product>()
         {
             new Product() { Id = 1, Name = "Blue Shark T-Shirt", Manufacturer = "Adidas",  PurchasePrice = 12.1 , SalePrice = 50.2 , Quantity = 10},
             new Product() { Id = 2, Name = "Red Crab T-Shirt", Manufacturer = "Nike",  PurchasePrice = 11.1 , SalePrice = 30.2 , Quantity = 10},
@@ -77,5 +78,18 @@ namespace ManageMagazine
             new Product() { Id = 6, Name = "Leather Belt", Manufacturer = "Lancerto",  PurchasePrice = 15.1 , SalePrice = 55.2 , Quantity = 4},
 
         };
+
+        private void AddNewProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AddEditProductWindow addEdit = new();
+                addEdit.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

@@ -34,7 +34,7 @@
                         <Label Content="&#xf2d1;"  Style="{StaticResource MenuIconsLabel}" FontSize="10"/>
                     </Button>
                     <Button Style="{StaticResource ClosingMinimalizeButton}"  Click="CloseButtonClick">
-                        <Label Content="&#xf00d;" Style="{StaticResource MenuIconsLabel}" FontSize="20"/>
+                        <Label Content="&#xf060;" Style="{StaticResource MenuIconsLabel}" FontSize="20"/>
                     </Button>
                 </StackPanel>
 
@@ -77,7 +77,7 @@
 
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Row="1">
-                    <Button Margin="0 0 25 0" Content="ADD"  Style="{StaticResource CustomerProductsButtons}"/>
+                    <Button Margin="0 0 25 0" Content="ADD" Click="AddNewProductButton_Click"  Style="{StaticResource CustomerProductsButtons}"/>
                     <Button Margin="25 0 25 0" Content="EDIT" Style="{StaticResource CustomerProductsButtons}"/>
                     <Button Margin="25 0 0 0" Content="DELETE" Style="{StaticResource CustomerProductsButtons}"/>
                 </StackPanel>
