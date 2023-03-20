@@ -182,7 +182,40 @@
 
         <!--#endregion-->
 
+        <!--#region CustomersWindow Styles -->
 
+
+        <Style x:Key="CustomerProductsButtons" TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Background" Value="#46EFAF"/>
+            <Setter Property="Foreground" Value="#fdfefe"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="25"  BorderThickness="1" BorderBrush="#46EFAF" Padding="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background"  Value="#31a77a"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background"  Value="#31a77a"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+
+        <!--#endregion-->
 
         
         

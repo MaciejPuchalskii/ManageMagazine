@@ -24,7 +24,9 @@
                 <StackPanel  HorizontalAlignment="Left"  Orientation="Horizontal">
                     <Image Source="Images/logo.png" Width="75" VerticalAlignment="Center" Margin="10"/>
                     <TextBlock Text="WareMaster" FontSize="40" Foreground="White" VerticalAlignment="Center" FontStyle="Italic"/>
+
                 </StackPanel>
+                    <TextBlock Text="Home" Foreground="White" VerticalAlignment="Center"  Style="{StaticResource titleText}"/>
 
                 <!-- User/Minimalize/Exit -->
                 <StackPanel HorizontalAlignment="Right" Height="30"  Orientation="Horizontal" VerticalAlignment="Top">
@@ -33,7 +35,7 @@
                         <Label Content="&#xf2d1;"  Style="{StaticResource MenuIconsLabel}" FontSize="10"/>
                     </Button>
                     <Button Style="{StaticResource ClosingMinimalizeButton}"  Click="CloseButtonClick">
-                        <Label Content="&#xf00d;" Style="{StaticResource MenuIconsLabel}" FontSize="20"/>
+                        <Label Content="&#xf060;" Style="{StaticResource MenuIconsLabel}" FontSize="20"/>
                     </Button>
                 </StackPanel>
 
@@ -45,9 +47,53 @@
         <!--#region Home-->
 
         <Border Grid.Row="1" CornerRadius="0 0 10 10" Background="#DFFBF0" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
 
-            <TextBlock Text="Home" Foreground="{StaticResource MainColorBrush}"  Style="{StaticResource titleText}"/>
 
+                <Border Grid.Row="0" Grid.Column="0" Margin="30" Background="#90f5cf" CornerRadius="20" BorderThickness="0">
+                    <StackPanel VerticalAlignment="Center" Height="200" Margin="30">
+                        <TextBlock HorizontalAlignment="Center"  Margin="0 0 0 10"  Text="Sales" Style="{StaticResource titleText}" TextAlignment="Center" Foreground="White"/>
+                        <TextBlock VerticalAlignment="Center" FontSize="30" Margin="0 0 0 20"  Text="Today's Sale: 20 $" Style="{StaticResource normalText}" TextAlignment="Center" Foreground="White"/>
+                        <TextBlock FontSize="30" Text="Total Sale:    300 $" Style="{StaticResource normalText}" TextAlignment="Center" Foreground="White"/>
+
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1"  CornerRadius="20" BorderThickness="0">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock HorizontalAlignment="Center"  Margin="0 0 0 10"  Text="Wykresik" Style="{StaticResource titleText}" TextAlignment="Center" Foreground="White"/>
+                   
+                    </StackPanel>
+                </Border>
+                
+                
+                <Border Grid.Row="1" Grid.Column="0"  CornerRadius="20" BorderThickness="0">
+                    <StackPanel VerticalAlignment="Center">
+
+                    </StackPanel>
+                </Border>
+                
+                <Border Grid.Row="1" Grid.Column="1" Margin="30" Background="#90f5cf" CornerRadius="20" BorderThickness="0">
+                    <StackPanel VerticalAlignment="Center" Height="200" Margin="30">
+                        <TextBlock HorizontalAlignment="Center"  Margin="0 0 0 10"  Text="Last Items in Stock " Style="{StaticResource titleText}" TextAlignment="Center" Foreground="White"/>
+                        <TextBlock  FontSize="20" Margin="0 0 0 10"  Text="Car Spray Red: 2 QTY" Style="{StaticResource normalText}" TextAlignment="Left" Foreground="White"/>
+                        <TextBlock  FontSize="20" Margin="0 0 0 10"  Text="Car Spray Blue: 1 QTY" Style="{StaticResource normalText}" TextAlignment="Left" Foreground="White"/>
+                        <TextBlock  FontSize="20" Margin="0 0 0 10"  Text="Car Spray Grey: 0 QTY" Style="{StaticResource normalText}" TextAlignment="Left" Foreground="White"/>
+
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+
+            
 
         </Border>
 

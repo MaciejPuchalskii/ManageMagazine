@@ -33,23 +33,56 @@
                         <Label Content="&#xf2d1;"  Style="{StaticResource MenuIconsLabel}" FontSize="10"/>
                     </Button>
                     <Button Style="{StaticResource ClosingMinimalizeButton}"  Click="CloseButtonClick">
-                        <Label Content="&#xf00d;" Style="{StaticResource MenuIconsLabel}" FontSize="20"/>
+                        <Label Content="&#xf060;" Style="{StaticResource MenuIconsLabel}" FontSize="20"/>
                     </Button>
                 </StackPanel>
 
+                <TextBlock Foreground="White" Text="Customers" VerticalAlignment="Center"  Style="{StaticResource titleText}"></TextBlock>
             </Grid>
         </Border>
 
         <!--#endregion-->
 
-        <!--#region Home-->
+        <!--#region Customers display -->
 
         <Border Grid.Row="1" CornerRadius="0 0 10 10" Background="#DFFBF0" >
-
-            <TextBlock Text="Customers Detail" Foreground="{StaticResource MainColorBrush}"  Style="{StaticResource titleText}"/>
+            <StackPanel>
+                
+                <ListView x:Name="UsersListView" Margin="20 20 20 200" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
+                    <ListView.View>
+                        <GridView>
+                            
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+                            
+                            <GridViewColumn Width="80" Header="ID" DisplayMemberBinding="{Binding Id}" />
+                            <GridViewColumn Width="160"  Header="Name" DisplayMemberBinding="{Binding FirstName}" />
+                            <GridViewColumn Width="160" Header="Last Name" DisplayMemberBinding="{Binding LastName}" />
+                            <GridViewColumn Width="160" Header="Phone Number" DisplayMemberBinding="{Binding PhoneNumber}" />
+                            <GridViewColumn Width="160" Header="City" DisplayMemberBinding="{Binding City}" />
+                            <GridViewColumn Width="140" Header="Street" DisplayMemberBinding="{Binding Street}" />
+                            <GridViewColumn Width="100" Header="House Number" DisplayMemberBinding="{Binding HouseNumber}" />
+                            <GridViewColumn Width="80" Header="Postal Code" DisplayMemberBinding="{Binding PostalCode}" />
+                            
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Margin="0 0 25 0" Content="ADD"  Style="{StaticResource CustomerProductsButtons}"/>
+                    <Button Margin="25 0 25 0" Content="EDIT" Style="{StaticResource CustomerProductsButtons}"/>
+                    <Button Margin="25 0 25 0" Content="DELETE" Style="{StaticResource CustomerProductsButtons}"/>
+                    <Button Margin="25 0 0 0" Content="DETAILS" Style="{StaticResource CustomerProductsButtons}"/>
+                </StackPanel>
+                
+            </StackPanel>
 
 
         </Border>
+        
 
         <!--#endregion-->
 

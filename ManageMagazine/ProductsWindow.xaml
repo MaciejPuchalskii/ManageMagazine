@@ -23,8 +23,9 @@
                 <!-- Logo-->
                 <StackPanel  HorizontalAlignment="Left"  Orientation="Horizontal">
                     <Image Source="Images/logo.png" Width="75" VerticalAlignment="Center" Margin="10"/>
-                    <TextBlock Text="WareMaster" FontSize="40" Foreground="White" VerticalAlignment="Center" FontStyle="Italic"/>
+                <TextBlock Text="WareMaster" FontSize="40" Foreground="White"  VerticalAlignment="Center" FontStyle="Italic"/>
                 </StackPanel>
+                <TextBlock Text="Products" Foreground="White"  VerticalAlignment="Center" Style="{StaticResource titleText}"/>
 
                 <!-- User/Minimalize/Exit -->
                 <StackPanel HorizontalAlignment="Right" Height="30"  Orientation="Horizontal" VerticalAlignment="Top">
@@ -42,14 +43,43 @@
 
         <!--#endregion-->
 
-        <!--#region Home-->
+        <!--#region Customers display -->
 
         <Border Grid.Row="1" CornerRadius="0 0 10 10" Background="#DFFBF0" >
+            <StackPanel>
 
-            <TextBlock Text="Products Detail" Foreground="{StaticResource MainColorBrush}"  Style="{StaticResource titleText}"/>
+                <ListView x:Name="ProductsListView" Margin="20 20 20 200" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
+                    <ListView.View>
+                        <GridView>
+
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+
+                            <GridViewColumn Width="80" Header="ID" DisplayMemberBinding="{Binding Id}" />
+                            <GridViewColumn Width="160"  Header="Name" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Width="160" Header="Manufacturer" DisplayMemberBinding="{Binding Manufacturer}" />
+                            <GridViewColumn Width="160" Header="Purchase Price" DisplayMemberBinding="{Binding PurchasePrice}" />
+                            <GridViewColumn Width="160" Header="Sale Price" DisplayMemberBinding="{Binding SalePrice}" />
+                            <GridViewColumn Width="140" Header="Quantity" DisplayMemberBinding="{Binding Quantity}" />
+                       
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Margin="0 0 25 0" Content="ADD"  Style="{StaticResource CustomerProductsButtons}"/>
+                    <Button Margin="25 0 25 0" Content="EDIT" Style="{StaticResource CustomerProductsButtons}"/>
+                    <Button Margin="25 0 0 0" Content="DELETE" Style="{StaticResource CustomerProductsButtons}"/>
+                </StackPanel>
+
+            </StackPanel>
 
 
         </Border>
+
 
         <!--#endregion-->
 
