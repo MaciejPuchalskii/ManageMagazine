@@ -37,7 +37,7 @@
                     </Button>
                 </StackPanel>
 
-                <TextBlock Text="Shipments" Foreground="White" VerticalAlignment="Center"  Style="{StaticResource titleText}"/>
+                <TextBlock Text="Orders" Foreground="White" VerticalAlignment="Center"  Style="{StaticResource titleText}"/>
             </Grid>
         </Border>
 
@@ -51,8 +51,44 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                
-                
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Style="{StaticResource titleText}" Margin="10" FontSize="30" Foreground="{StaticResource MainColorBrush}" Text="History"/>
+                    <ListView x:Name="ProductsListView" Margin="20 20 20 200" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
+                        <ListView.View>
+                            <GridView>
+
+                                <GridView.ColumnHeaderContainerStyle>
+                                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </Style>
+                                </GridView.ColumnHeaderContainerStyle>
+
+                                <GridViewColumn Width="150" Header="ID" DisplayMemberBinding="{Binding Id}" />
+                                <GridViewColumn Width="150"  Header="Buyer" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Width="150" Header="Price" DisplayMemberBinding="{Binding Manufacturer}" />
+                            
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+
+                <Border  Background="White" Grid.Column="1" Margin="20" CornerRadius="30">
+                    <StackPanel>
+
+                        <TextBlock Text="Details" Style="{StaticResource titleText}" Margin="10" FontSize="20" HorizontalAlignment="Center" Foreground="{StaticResource MainColorBrush}"/>
+                        <TextBlock Text="Sale ID: 1" Style="{StaticResource titleText}" Margin="10" FontSize="20" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
+                        <TextBlock Text="Buyer: Adam Kwiatkowski" Style="{StaticResource titleText}" Margin="10" FontSize="20" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
+                        <TextBlock Text="Address: Opole | Niemodlińska | 12/2" Style="{StaticResource titleText}" Margin="10" FontSize="20" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
+                        <TextBlock Text="Items:" Style="{StaticResource titleText}" Margin="10" FontSize="20" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
+                        <TextBlock Text="- Blue Shirt x2" Style="{StaticResource normalText}" Margin="10" FontSize="15" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
+                        <TextBlock Text="- Red Shirt x4" Style="{StaticResource titleText}" Margin="10" FontSize="15" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
+                        <TextBlock Text="- White Shirt x1" Style="{StaticResource titleText}" Margin="10" FontSize="15" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
+                        <TextBlock Text="SUM:100$" Style="{StaticResource titleText}" Margin="10 10 0 0" FontSize="20" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
+                    </StackPanel>
+                </Border>
+
+                <Button Content="Clear History" Height="50" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Style="{StaticResource mainloginButtons}"/>
             </Grid>
             
 
