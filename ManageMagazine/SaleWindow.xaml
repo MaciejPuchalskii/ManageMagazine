@@ -51,9 +51,9 @@
 
                 <Border Margin="40" Height="500" Background="#90f5cf" CornerRadius="20" BorderThickness="0">
                     <Grid>
-                        <TextBlock Text="Order" Style="{StaticResource titleText }" Foreground="White" HorizontalAlignment="Center" Margin="10"/>
+                        <TextBlock Text="Order" Height="50" Style="{StaticResource titleText }" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10"/>
                          
-                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Comfirm" Style="{StaticResource registerButton}" Height="50"/>
+                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Confirm" Style="{StaticResource registerButton}" Height="50"/>
                     </Grid>
                 </Border>
                 
