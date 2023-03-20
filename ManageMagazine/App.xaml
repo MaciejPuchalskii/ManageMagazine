@@ -188,6 +188,8 @@
         <Style x:Key="CustomerProductsButtons" TargetType="Button">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="50"/>
+            
             <Setter Property="Background" Value="#46EFAF"/>
             <Setter Property="Foreground" Value="#fdfefe"/>
             <Setter Property="FontWeight" Value="Bold"/>

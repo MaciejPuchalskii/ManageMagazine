@@ -8,21 +8,49 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\city.png" />
     <None Remove="Images\Email.png" />
+    <None Remove="Images\house.png" />
     <None Remove="Images\Lock.png" />
+    <None Remove="Images\phone.png" />
+    <None Remove="Images\post.png" />
+    <None Remove="Images\street.png" />
+    <None Remove="Images\testLogo.png" />
+    <None Remove="Images\user.png" />
     <None Remove="Images\user.svg" />
     <None Remove="logo.png" />
     <None Remove="Resources\Font Awesome 6 Free Solid.otf" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\city.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Email.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\house.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Lock.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\logo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\phone.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\post.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\street.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\testLogo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\user.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Font Awesome 6 Free Solid.otf">

@@ -80,5 +80,17 @@ namespace ManageMagazine
 
         #endregion
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AddEditCustomerWindow addEdit = new();
+                addEdit.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

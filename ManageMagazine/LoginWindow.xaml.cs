@@ -116,5 +116,18 @@ namespace ManageMagazine
                 this.DragMove();
             }
         }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                RegisterWindow registerWindow = new();
+                registerWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

@@ -10,34 +10,31 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ManageMagazine
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for RegisterWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RegisterWindow : Window
     {
-        public MainWindow()
+        public RegisterWindow()
         {
             InitializeComponent();
-
         }
 
         #region ClosingMinimalizingApp
         /* Closing, Minimalizing, Login Navigation buttons functionality*/
 
         // Closing button function
-
         private void CloseButtonClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                this.Close();
+                Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -56,75 +53,14 @@ namespace ManageMagazine
                 MessageBox.Show(ex.Message);
             }
         }
-        private void UserButtonClick(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                UserWindow account = new();
-                account.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
-
-        private void SalesNavigation(object sender, RoutedEventArgs e)
+        // Navigation User -> MainWindow / MainWindow -> User
+        private void NavigationButton(object sender, RoutedEventArgs e)
         {
             try
             {
-                SaleWindow saleWindow = new();
-                saleWindow.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        private void ProductsNavigation(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ProductsWindow productsWindow = new();
-                productsWindow.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        private void CustomersNavigation(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                CustomersWindow customerWindow = new();
-                customerWindow.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        private void UserNavigation(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ShipmentWindow shipmentWindow = new();
-                shipmentWindow.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        private void HomeNavigation(object sender, RoutedEventArgs e)
-        {
-
-            try
-            {
-                HomeWindow homeWindow = new();
-                homeWindow.ShowDialog();
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -136,18 +72,61 @@ namespace ManageMagazine
 
         #endregion
 
+        private void textEmail_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtEmail.Focus();
+        }
+
+        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            if (!string.IsNullOrEmpty(txtEmail.Text) && txtEmail.Text.Length > 0)
+            {
+                textEmail.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textEmail.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void textPassword_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtPassword.Focus();
+        }
+
+        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtPassword.Password) && txtPassword.Password.Length > 0)
+            {
+                textPassword.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textPassword.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Button_Click_Open_Menu(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MainWindow mainWindow = new();
+                mainWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(e.ChangedButton == MouseButton.Left)
+            if (e.ChangedButton == MouseButton.Left)
             {
                 this.DragMove();
             }
         }
 
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

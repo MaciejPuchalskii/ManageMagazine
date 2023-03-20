@@ -14,15 +14,15 @@ using System.Windows.Shapes;
 
 namespace ManageMagazine
 {
-    /// <summary>
-    /// Interaction logic for UserWindow.xaml
-    /// </summary>
-    public partial class UserWindow : Window
+
+    public partial class ShipmentWindow : Window
     {
-        public UserWindow()
+        public ShipmentWindow() 
         {
             InitializeComponent();
         }
+
+
         #region ClosingMinimalizingApp
         /* Closing, Minimalizing, Login Navigation buttons functionality*/
 
@@ -47,10 +47,23 @@ namespace ManageMagazine
             }
         }
 
+        // Minimalize button function
+
+        private void MinimalizeButtonClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.WindowState = WindowState.Minimized;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
 
 
         #endregion
-    }
 
+    }
 }

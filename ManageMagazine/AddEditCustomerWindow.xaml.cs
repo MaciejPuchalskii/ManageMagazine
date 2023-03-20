@@ -15,18 +15,14 @@ using System.Windows.Shapes;
 namespace ManageMagazine
 {
     /// <summary>
-    /// Interaction logic for UserWindow.xaml
+    /// Interaction logic for AddEditCustomer.xaml
     /// </summary>
-    public partial class UserWindow : Window
+    public partial class AddEditCustomerWindow : Window
     {
-        public UserWindow()
+        public AddEditCustomerWindow()
         {
             InitializeComponent();
         }
-        #region ClosingMinimalizingApp
-        /* Closing, Minimalizing, Login Navigation buttons functionality*/
-
-        // Closing button function
         private void CloseButtonClick(object sender, RoutedEventArgs e)
         {
             try
@@ -46,11 +42,5 @@ namespace ManageMagazine
                 this.DragMove();
             }
         }
-
-
-
-
-        #endregion
     }
-
 }
