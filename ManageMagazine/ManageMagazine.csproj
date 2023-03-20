@@ -12,8 +12,13 @@
     <None Remove="Images\Email.png" />
     <None Remove="Images\house.png" />
     <None Remove="Images\Lock.png" />
+    <None Remove="Images\money.png" />
+    <None Remove="Images\money2.png" />
+    <None Remove="Images\name.png" />
     <None Remove="Images\phone.png" />
     <None Remove="Images\post.png" />
+    <None Remove="Images\producer.png" />
+    <None Remove="Images\quantity.png" />
     <None Remove="Images\street.png" />
     <None Remove="Images\testLogo.png" />
     <None Remove="Images\user.png" />
@@ -38,10 +43,25 @@
     <Resource Include="Images\logo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\money.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\money2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\name.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\phone.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\post.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\producer.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\quantity.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\street.png">
