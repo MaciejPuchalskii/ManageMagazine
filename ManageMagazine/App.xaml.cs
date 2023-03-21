@@ -14,4 +14,5 @@ namespace ManageMagazine
     public partial class App : Application
     {
     }
+
 }
