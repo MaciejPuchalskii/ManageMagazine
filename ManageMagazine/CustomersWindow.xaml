@@ -50,11 +50,13 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 
                 <StackPanel Orientation="Vertical" Grid.Row="0">
+                    <ScrollViewer Height="430">
 
-                    <ListView x:Name="UsersListView" Margin="20 20 20 200" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
+                        <ListView x:Name="CustomersListView" Margin="20 20 20 200" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
                         <ListView.View>
                             <GridView>
 
@@ -64,7 +66,7 @@
                                     </Style>
                                 </GridView.ColumnHeaderContainerStyle>
 
-                                <GridViewColumn Width="80" Header="ID" DisplayMemberBinding="{Binding Id}" />
+                                <GridViewColumn Width="60" Header="ID" DisplayMemberBinding="{Binding Id}" />
                                 <GridViewColumn Width="160"  Header="Name" DisplayMemberBinding="{Binding FirstName}" />
                                 <GridViewColumn Width="160" Header="Last Name" DisplayMemberBinding="{Binding LastName}" />
                                 <GridViewColumn Width="160" Header="Phone Number" DisplayMemberBinding="{Binding PhoneNumber}" />
@@ -76,18 +78,112 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
+                    </ScrollViewer>
+
                 </StackPanel>
 
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
-                    <Button Margin="0 0 25 0" Click="Button_Click" Content="ADD"  Style="{StaticResource CustomerProductsButtons}"/>
-                    <Button Margin="25 0 25 0" Content="EDIT" Style="{StaticResource CustomerProductsButtons}"/>
-                    <Button Margin="25 0 25 0" Content="DELETE" Style="{StaticResource CustomerProductsButtons}"/>
-                    <Button Margin="25 0 0 0" Content="DETAILS" Style="{StaticResource CustomerProductsButtons}"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                    <Border BorderThickness="1" BorderBrush="#acb0af"  Margin="0 0 10 0" Width="125" Height="50" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/User.png" Height="20" />
+                            <TextBlock x:Name="CustomerNameText" MouseDown="CustomerNameText_MouseDown" Text="Name" Style="{StaticResource textHint }" />
+
+                            <TextBox x:Name="CustomerNameTxt" TextChanged="CustomerNameTxt_TextChanged"  Text="{x:Null}"  Style="{StaticResource textBox}" Grid.Column="1" Height="30" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" Margin="10 0 10 0" Width="150" Height="50" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/User.png" Height="20"/>
+                            <TextBlock  MouseDown="LastNameText_MouseDown"  x:Name="LastNameText" Text="Last Name" Style="{StaticResource textHint }" />
+
+                            <TextBox TextChanged="LastNameTxt_TextChanged" x:Name="LastNameTxt"  Text="{x:Null}" Style="{StaticResource textBox}"/>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af"  Margin="10 0 10 0" Width="150" Height="50" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/phone.png" Height="20"/>
+                            <TextBlock x:Name="PhoneNumberText" MouseDown="PhoneNumberText_MouseDown" Text="Phone Number" Style="{StaticResource textHint }" />
+
+                            <TextBox x:Name="PhoneNumberTxt" TextChanged="PhoneNumberTxt_TextChanged"  Text="{x:Null}" Style="{StaticResource textBox}"/>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af"  Margin="10 0 0 0" Width="150" Height="50" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/producer.png" Height="20"/>
+                            <TextBlock x:Name="CityText" MouseDown="CityText_MouseDown" Text="City" Style="{StaticResource textHint }" />
+
+                            <TextBox x:Name="CityTxt"  TextChanged="CityTxt_TextChanged" Text="{x:Null}" Style="{StaticResource textBox}"/>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af"  Margin="10 0 0 0" Width="150" Height="50" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/name.png" Height="20"/>
+                            <TextBlock x:Name="StreetText" Text="Street" MouseDown="StreetText_MouseDown" Style="{StaticResource textHint }" />
+
+                            <TextBox x:Name="StreetTxt"  Text="{x:Null}" TextChanged= "StreetTxt_TextChanged" Style="{StaticResource textBox}"/>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af"  Margin="10 0 0 0" Width="100" Height="50" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock x:Name="HouseNumberText" Text="House ID" MouseDown="HouseNumberText_MouseDown" Style="{StaticResource textHint }" />
+
+                            <TextBox x:Name="HouseNumberTxt"  Text="{x:Null}" TextChanged= "HouseNumberTxt_TextChanged" Style="{StaticResource textBox}"/>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af"  Margin="10 0 0 0" Width="125" Height="50" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock x:Name="PostalCodeText" Text="Postal Code" MouseDown="PostalCodeText_MouseDown" Style="{StaticResource textHint }" />
+
+                            <TextBox x:Name="PostalCodeTxt"  Text="{x:Null}" TextChanged= "PostalCodeTxt_TextChanged" Style="{StaticResource textBox}"/>
+                        </Grid>
+                    </Border>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Row="2">
+                    <Button Margin="0 0 25 0" Content="ADD" Click="AddCustomerButtonCLick"  Style="{StaticResource CustomerProductsButtons}"/>
+                    <Button Margin="25 0 25 0" x:Name="EditSaveButton" Content="EDIT" Click="EditCustomerButtonCLick" Style="{StaticResource CustomerProductsButtons}"/>
+                    <Button Margin="25 0 0 0" Content="DELETE" Click="DeleteCustomerButtonCLick" Style="{StaticResource CustomerProductsButtons}"/>
                 </StackPanel>
 
-                
-            
+
+
             </Grid>
 
             </Border>

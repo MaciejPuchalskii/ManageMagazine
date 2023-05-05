@@ -50,10 +50,11 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Vertical" Grid.Row="0">
-
-                    <ListView x:Name="ProductsListView" Margin="20 20 20 200" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
+                    <ScrollViewer Height="430">
+                        <ListView x:Name="ProductsListView" Margin="20 20 20 200" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
                         <ListView.View>
                             <GridView>
 
@@ -75,11 +76,81 @@
                     </ListView>
 
 
+                        </ScrollViewer>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Row="1">
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                    <Border BorderThickness="1" BorderBrush="#acb0af"  Margin="0 0 10 0" Width="200" Height="50" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/name.png" Height="20" />
+                            <TextBlock x:Name="ProductNameText" MouseDown="ProductName_MouseDown" Text="Product Name" Style="{StaticResource textHint }" />
+
+                            <TextBox x:Name="ProductNameTxt" TextChanged="ProductNameText_TextChanged"  Text="{x:Null}"  Style="{StaticResource textBox}" Grid.Column="1" Height="30" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" Margin="10 0 10 0" Width="200" Height="50" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/producer.png" Height="20"/>
+                            <TextBlock  MouseDown="Producer_MouseDown"  x:Name="ProducerText" Text="Producer" Style="{StaticResource textHint }" />
+
+                            <TextBox TextChanged="ProducerText_TextChanged" x:Name="ProducerTxt"  Text="{x:Null}" Style="{StaticResource textBox}"/>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af"  Margin="10 0 10 0" Width="200" Height="50" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/Money2.png" Height="20"/>
+                            <TextBlock x:Name="PurchasePriceText" MouseDown="PurchasePrice_MouseDown" Text="Purchase Price" Style="{StaticResource textHint }" />
+
+                            <TextBox x:Name="PurchasePriceTxt" TextChanged="PurchasePriceText_TextChanged"  Text="{x:Null}" Style="{StaticResource textBox}"/>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af"  Margin="10 0 0 0" Width="200" Height="50" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/money.png" Height="20"/>
+                            <TextBlock x:Name="SalePriceText" MouseDown="SalePrice_MouseDown" Text="Sale Price" Style="{StaticResource textHint }" />
+
+                            <TextBox x:Name="SalePriceTxt"  TextChanged="SalePriceText_TextChanged" Text="{x:Null}" Style="{StaticResource textBox}"/>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af"  Margin="10 0 0 0" Width="200" Height="50" CornerRadius="5">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/money.png" Height="20"/>
+                            <TextBlock x:Name="QuantityText" Text="Quantity" MouseDown="Quantity_MouseDown" Style="{StaticResource textHint }" />
+
+                            <TextBox x:Name="QuantityTxt"  Text="{x:Null}" TextChanged= "Quantitys_TextChanged" Style="{StaticResource textBox}"/>
+                        </Grid>
+                    </Border>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Grid.Row="2">
                     <Button Margin="0 0 25 0" Content="ADD" Click="AddNewProductButton_Click"  Style="{StaticResource CustomerProductsButtons}"/>
-                    <Button Margin="25 0 25 0" Content="EDIT" Style="{StaticResource CustomerProductsButtons}"/>
-                    <Button Margin="25 0 0 0" Content="DELETE" Style="{StaticResource CustomerProductsButtons}"/>
+                    <Button Margin="25 0 25 0" x:Name="EditSaveButton" Content="EDIT" Click="Edit_Button_Click" Style="{StaticResource CustomerProductsButtons}"/>
+                    <Button Margin="25 0 0 0" Content="DELETE" Click="Delete_Button_Click" Style="{StaticResource CustomerProductsButtons}"/>
                 </StackPanel>
             </Grid>
 

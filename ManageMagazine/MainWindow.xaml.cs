@@ -56,18 +56,7 @@ namespace ManageMagazine
                 MessageBox.Show(ex.Message);
             }
         }
-        private void UserButtonClick(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                UserWindow account = new();
-                account.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+       
 
 
         private void SalesNavigation(object sender, RoutedEventArgs e)

@@ -47,16 +47,67 @@
 
         <Border Grid.Row="1" CornerRadius="0 0 10 10" Background="#DFFBF0" >
             <StackPanel Orientation="Vertical">
-                
 
-                <Border Margin="40" Height="500" Background="#90f5cf" CornerRadius="20" BorderThickness="0">
-                    <Grid>
-                        <TextBlock Text="Order" Height="50" Style="{StaticResource titleText }" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10"/>
-                         
-                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Confirm" Style="{StaticResource registerButton}" Height="50"/>
+                <Button Content="New Order" Style="{StaticResource registerButton}" Click="NewOrderButtonClick" HorizontalAlignment="Left"
+                        Margin="20 20 0 20"/>
+                <Border Margin="20 0 20 20" Height="500" Background="#90f5cf" CornerRadius="20" BorderThickness="0">
+                    <Grid x:Name="MainGrid" IsEnabled="False">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Pole tekstowe do wyszukiwania produktów -->
+                        <TextBox Grid.Row="0" Grid.Column="0" x:Name="SearchBox" TextChanged="SearchBox_TextChanged"  />
+
+                        <!-- Lista produktów -->
+                        <ListView Grid.Row="1" Grid.Column="0" x:Name="ProductListView" 
+               SelectionMode="Single" DisplayMemberPath="FullDetails"/>
+
+                        <!-- Panel z przyciskami -->
+                        <Grid Grid.Row="1" Grid.Column="1" x:Name="ButtonPanel">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="AddButton" Content="ADD" Click="AddToCart" Style="{StaticResource ClosingMinimalizeButton}" Margin="10,75,39,338" Width="NaN" Height="40" Grid.Column="1"/>
+                            <TextBox x:Name="QuantityTextBox" FontSize="20" Margin="20,75,0,338" Width="100" Height="40" PreviewTextInput="QuantityTextBox_PreviewTextInput"/>
+                            <Button x:Name="RemoveButton" Content="REMOVE" Click="RemoveButton_Click" Style="{StaticResource ClosingMinimalizeButton}" Margin="10,147,39,261" Width="NaN" Grid.Column="1"/>
+                        </Grid>
+
+                        <!-- Lista zamówionych produktów -->
+                        <ListView Grid.Column="1" x:Name="CartListView" 
+              DisplayMemberPath="DisplayInfo" SelectionMode="Single"  Grid.ColumnSpan="2" Margin="303,0,0,29" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5">
+                            <ListView.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleY="0.564"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform Y="-1.49"/>
+                                </TransformGroup>
+                            </ListView.RenderTransform>
+                        </ListView>
+
+                        <!-- Wybór użytkownika -->
+                        <ComboBox Grid.Row="2" Grid.Column="0" x:Name="CustomerComboBox" 
+              DisplayMemberPath="FullNameWithPhoneNumber" SelectedValuePath="Id"/>
+
+                        <!-- Panel z przyciskiem złożenia zamówienia -->
+                        <StackPanel Grid.Row="2" Grid.Column="2" x:Name="OrderPanel">
+                            <TextBlock x:Name="Total" Text="0 $" FontSize="10"/>
+                            <Button x:Name="OrderButton" Content="ORDER" Width="auto" Style="{StaticResource ClosingMinimalizeButton}"  Click="OrderButton_Click"/>
+                        </StackPanel>
+
                     </Grid>
                 </Border>
-                
+
             </StackPanel>
         </Border>
 

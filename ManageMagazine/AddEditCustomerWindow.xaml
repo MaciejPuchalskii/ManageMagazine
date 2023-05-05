@@ -137,7 +137,7 @@
                 </Border>
                     
                 </StackPanel>
-                <Button Content="Save" Margin="20" Style="{StaticResource registerButton}"/>
+                <Button HorizontalAlignment="Right" Content="Save" Margin="10" Height="70" FontSize="30" Style="{StaticResource registerButton}"/>
 
             </StackPanel>
         </Border>

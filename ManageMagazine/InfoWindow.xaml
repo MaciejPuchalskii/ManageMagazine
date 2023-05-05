@@ -1,0 +1,21 @@
+﻿<Window x:Class="ManageMagazine.InfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManageMagazine"
+        mc:Ignorable="d"
+        Title="Info" Height="150" Width="200" WindowStyle="None" WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent" >
+    <Grid>
+        <Border Background="{StaticResource MainColorBrush}" CornerRadius="20">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock x:Name="Comunicate"  Text="No element was chosen" Style="{StaticResource normalText}"/>
+                <Button Style="{StaticResource CustomerProductsButtons}" Background="Black" Width="70" Height="50" Content="OK" Click="OK_Button_Click"/>
+            </StackPanel>
+
+
+        </Border>
+        
+    </Grid>
+</Window>

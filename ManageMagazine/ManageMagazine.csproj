@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Data.SQLite" Version="1.0.117" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\city.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

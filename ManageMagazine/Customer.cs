@@ -14,8 +14,20 @@ namespace ManageMagazine
         public string PhoneNumber { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
-        public string HouseNumber { get; set; }
+        public int HouseNumber { get; set; }
         public string PostalCode { get; set; }
+        public string FullNameWithPhoneNumber => $"{FirstName} {LastName} ({PhoneNumber})";
 
+        public Customer(int id, string firstName, string lastName, string phoneNumber, string city, string street, int houseNumber, string postalCode)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            PhoneNumber = phoneNumber;
+            City = city;
+            Street = street;
+            HouseNumber = houseNumber;
+            PostalCode = postalCode;
+        }
     }
 }

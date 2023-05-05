@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +18,241 @@ namespace ManageMagazine
 
     public partial class CustomersWindow : Window
     {
+       
+        List<Customer> customersList = new List<Customer>() { };
+        Database databaseObject;
+        bool isBeingEdited = false;
+
         public CustomersWindow()
         {
             InitializeComponent();
-            UsersListView.ItemsSource = custemerList;
+            databaseObject = new Database();
+            GetDataFromDB();
+            CustomersListView.ItemsSource = customersList;
+        }
+        private void GetDataFromDB()
+        {
+            databaseObject.OpenConnection();
+            string query = "Select * from customers";
+            SQLiteCommand myCommand = new SQLiteCommand(query, databaseObject.myConnection);
+
+            SQLiteDataReader result = myCommand.ExecuteReader();
+
+            if (result.HasRows)
+            {
+                while (result.Read())
+                {
+                    customersList.Add(new Customer(Convert.ToInt32(result["id"]),
+                                                                result["FirstName"].ToString(),
+                                                                result["LastName"].ToString(),
+                                                                result["PhoneNumber"].ToString(),
+                                                                result["City"].ToString(),
+                                                                result["Street"].ToString(),
+                                                                Convert.ToInt32(result["HouseNumber"]),
+                                                                result["PostalCode"].ToString()));
+                }
+            }
+
+            databaseObject.CloseConnection();
         }
 
 
+        private void AddCustomerButtonCLick(object sender, RoutedEventArgs e)
+        {
+            if(!(string.IsNullOrEmpty(CustomerNameTxt.Text) && 
+                string.IsNullOrEmpty(LastNameTxt.Text) && 
+                string.IsNullOrEmpty(PhoneNumberTxt.Text) && 
+                string.IsNullOrEmpty(CityTxt.Text) && 
+                string.IsNullOrEmpty(StreetTxt.Text) &&
+                string.IsNullOrEmpty(HouseNumberTxt.Text) && 
+                string.IsNullOrEmpty(PostalCodeTxt.Text)))
+            {
+                try
+                {
+                    string query = "INSERT INTO customers ('FirstName','LastName','PhoneNumber','City','Street','HouseNumber','PostalCode') VALUES (@FirstName,@LastName,@PhoneNumber,@City,@Street,@HouseNumber,@PostalCode)";
+
+                    SQLiteCommand myCommand = new SQLiteCommand(query, databaseObject.myConnection);
+
+                    int lastCustomerId = customersList.Count;
+
+                    databaseObject.OpenConnection();
+
+                    myCommand.Parameters.AddWithValue("@FirstName", CustomerNameTxt.Text);
+                    myCommand.Parameters.AddWithValue("@LastName",LastNameTxt.Text);
+                    myCommand.Parameters.AddWithValue("@PhoneNumber",PhoneNumberTxt.Text);
+                    myCommand.Parameters.AddWithValue("@City", CityTxt.Text);
+                    myCommand.Parameters.AddWithValue("@Street", StreetTxt.Text);
+                    myCommand.Parameters.AddWithValue("@HouseNumber", Convert.ToInt32(HouseNumberTxt.Text));
+                    myCommand.Parameters.AddWithValue("@PostalCode", PostalCodeTxt.Text);
+                    myCommand.ExecuteNonQuery();
+
+                    databaseObject.CloseConnection();
+                    customersList.Add(
+                        new Customer(
+                            lastCustomerId + 1,
+                            CustomerNameTxt.Text,
+                            LastNameTxt.Text,
+                            PhoneNumberTxt.Text,
+                            CityTxt.Text,
+                            StreetTxt.Text,
+                            Convert.ToInt32(HouseNumberTxt.Text),
+                            PostalCodeTxt.Text
+                        ));
+                    Refresh();
+                    ClearTextInput();
+
+                }
+                catch (Exception)
+                {
+                    InfoWindow window = new InfoWindow("Wrong Input");
+                    window.ShowDialog();
+                }
+            }
+        }
+        private void EditCustomerButtonCLick(object sender, RoutedEventArgs e)
+        {
+            if (CustomersListView.SelectedIndex != -1) //sprawdzenie, czy wybrano element do edycji
+            {
+                int index = CustomersListView.SelectedIndex;
+                int customerId = customersList[index].Id;
+                if (!isBeingEdited)
+                {
+                    try
+                    {
+                        CustomerNameTxt.Text = customersList[index].FirstName;
+                        LastNameTxt.Text = customersList[index].LastName;
+                        PhoneNumberTxt.Text = customersList[index].PhoneNumber;
+                        CityTxt.Text = customersList[index].City;
+                        StreetTxt.Text = customersList[index].Street;
+                        HouseNumberTxt.Text = customersList[index].HouseNumber.ToString();
+                        PostalCodeTxt.Text = customersList[index].PostalCode;
+
+                        EditSaveButton.Content = "SAVE";
+                        isBeingEdited = true;
+
+                    }
+                    catch
+                    {
+                        InfoWindow window = new InfoWindow("Wrong Input");
+                        window.ShowDialog();
+                    }
+                }
+                else
+                {
+                    //try
+                    //{
+                        customersList[index].FirstName = CustomerNameTxt.Text;
+                        customersList[index].LastName = LastNameTxt.Text;
+                        customersList[index].PhoneNumber = PhoneNumberTxt.Text;
+                        customersList[index].City = CityTxt.Text;
+                        customersList[index].Street = StreetTxt.Text;
+                        customersList[index].HouseNumber = Convert.ToInt32(HouseNumberTxt.Text);
+                        customersList[index].PostalCode = PostalCodeTxt.Text;
+
+                        EditSaveButton.Content = "EDIT";
+                        isBeingEdited = false;
+                       
+
+                        string query = "UPDATE customers SET FirstName=@FirstName, LastName=@LastName, PhoneNumber=@PhoneNumber, City=@City, Street=@Street, HouseNumber = @HouseNumber, PostalCode = @PostalCode WHERE id=@id";
+
+                        SQLiteCommand myCommand = new SQLiteCommand(query, databaseObject.myConnection);
+
+                        databaseObject.OpenConnection();
+
+                       
+                        myCommand.Parameters.AddWithValue("@FirstName", CustomerNameTxt.Text);
+                        myCommand.Parameters.AddWithValue("@LastName", LastNameTxt.Text);
+                        myCommand.Parameters.AddWithValue("@PhoneNumber", PhoneNumberTxt.Text);
+                        myCommand.Parameters.AddWithValue("@City", CityTxt.Text);
+                        myCommand.Parameters.AddWithValue("@Street", StreetTxt.Text);
+                        myCommand.Parameters.AddWithValue("@HouseNumber", Convert.ToInt32(HouseNumberTxt.Text));
+                        myCommand.Parameters.AddWithValue("@PostalCode", PostalCodeTxt.Text);
+                        myCommand.Parameters.AddWithValue("@id", customerId); //zmiana indeksu na ID produktu
+
+
+                        myCommand.ExecuteNonQuery();
+
+                        databaseObject.CloseConnection();
+                        Refresh();
+                        ClearTextInput();
+
+                    //}
+                    //catch
+                    //{
+                    //    InfoWindow window = new InfoWindow("Wrong Input");
+                    //    window.ShowDialog();
+                    //}
+                }
+            }
+            else //nie wybrano produktu do edycji
+            {
+                InfoWindow window = new InfoWindow("No element was chosen");
+                window.ShowDialog();
+            }
+        }
+        private void DeleteCustomerButtonCLick(object sender, RoutedEventArgs e)
+        {
+            if (CustomersListView.SelectedIndex != -1) //sprawdzenie, czy wybrano element do usunięcia
+            {
+                int index = CustomersListView.SelectedIndex;
+                int customerId = customersList[index].Id;
+
+                try
+                {
+                    string query = "DELETE FROM customers WHERE id=@id";
+
+                    SQLiteCommand myCommand = new SQLiteCommand(query, databaseObject.myConnection);
+
+                    databaseObject.OpenConnection();
+
+                    myCommand.Parameters.AddWithValue("@id", customerId);
+
+                    myCommand.ExecuteNonQuery();
+
+                    databaseObject.CloseConnection();
+                    customersList.RemoveAt(index);
+
+                    Refresh();
+                    ClearTextInput();
+                }
+                catch (Exception)
+                {
+                    InfoWindow window = new InfoWindow("Error while deleting product");
+                    window.ShowDialog();
+                }
+            }
+            else //nie wybrano produktu do usunięcia
+            {
+                InfoWindow window = new InfoWindow("No element was chosen");
+                window.ShowDialog();
+            }
+        }
+
+        private void ClearTextInput()
+        {
+            CustomerNameTxt.Text = null;
+            CustomerNameText.Visibility = Visibility.Visible;
+            LastNameTxt.Text = null;
+            LastNameText.Visibility = Visibility.Visible;
+            PhoneNumberTxt.Text = null;
+            PhoneNumberText.Visibility = Visibility.Visible;
+            CityTxt.Text = null;
+            CityText.Visibility = Visibility.Visible;
+            StreetTxt.Text = null;
+            StreetText.Visibility = Visibility.Visible;
+            HouseNumberTxt.Text = null;
+            HouseNumberText.Visibility = Visibility.Visible;
+            PostalCodeTxt.Text = null;
+            PostalCodeText.Visibility = Visibility.Visible;
+        }
+        private void Refresh()
+        {
+            CustomersListView.ItemsSource = null;
+            customersList.Clear();
+
+            GetDataFromDB();
+            CustomersListView.ItemsSource = customersList;
+        }
         #region ClosingMinimalizingApp
         /* Closing, Minimalizing, Login Navigation buttons functionality*/
 
@@ -62,35 +291,133 @@ namespace ManageMagazine
             }
         }
 
-        List<Customer> custemerList = new List<Customer>()
-        {
-            new Customer() { Id = 1, FirstName = "Anna", LastName = "Kowalska", PhoneNumber = "111 111 111", City = "Warszawa", Street = "Marszałkowska", HouseNumber = "1", PostalCode = "00-001" },
-            new Customer() { Id = 2, FirstName = "Jan", LastName = "Nowak", PhoneNumber = "222 222 222", City = "Kraków", Street = "Krakowska", HouseNumber = "2", PostalCode = "30-001" },
-            new Customer() { Id = 3, FirstName = "Maria", LastName = "Nowacka", PhoneNumber = "333 333 333", City = "Gdańsk", Street = "Gdańska", HouseNumber = "3", PostalCode = "80-001" },
-            new Customer() { Id = 4, FirstName = "Adam", LastName = "Kowalski", PhoneNumber = "444 444 444", City = "Poznań", Street = "Poznańska", HouseNumber = "4", PostalCode = "60-001" },
-            new Customer() { Id = 5, FirstName = "Karolina", LastName = "Kowalczyk", PhoneNumber = "555 555 555", City = "Wrocław", Street = "Wrocławska", HouseNumber = "5", PostalCode = "50-001" },
-            new Customer() { Id = 6, FirstName = "Tomasz", LastName = "Kowalski", PhoneNumber = "666 666 666", City = "Szczecin", Street = "Szczecińska", HouseNumber = "6", PostalCode = "70-001" },
-            new Customer() { Id = 7, FirstName = "Magdalena", LastName = "Nowakowska", PhoneNumber = "777 777 777", City = "Gdynia", Street = "Gdyńska", HouseNumber = "7", PostalCode = "81-001" },
-            new Customer() { Id = 8, FirstName = "Kamil", LastName = "Nowak", PhoneNumber = "888 888 888", City = "Katowice", Street = "Katowicka", HouseNumber = "8", PostalCode = "40-001" },
-            new Customer() { Id = 9, FirstName = "Natalia", LastName = "Kowalska", PhoneNumber = "999 999 999", City = "Łódź", Street = "Łódzka", HouseNumber = "9", PostalCode = "90-001" },
-            new Customer() { Id = 10, FirstName = "Piotr", LastName = "Kowalczyk", PhoneNumber = "101 101 101", City = "Gliwice", Street = "Gliwicka", HouseNumber = "10", PostalCode = "44-100" }
-        };
+      
 
 
 
         #endregion
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        #region MouseDown Focusing Text etc
+
+        private void CustomerNameText_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            try
+            CustomerNameTxt.Focus();
+        }
+
+        private void CustomerNameTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(CustomerNameText.Text) && CustomerNameText.Text.Length > 0)
             {
-                AddEditCustomerWindow addEdit = new();
-                addEdit.ShowDialog();
+                CustomerNameText.Visibility = Visibility.Collapsed;
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                CustomerNameText.Visibility = Visibility.Visible;
             }
         }
+
+
+        private void LastNameText_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            LastNameTxt.Focus();
+        }
+        private void LastNameTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(LastNameText.Text) && LastNameText.Text.Length > 0)
+            {
+                LastNameText.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                LastNameText.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void PhoneNumberText_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PhoneNumberTxt.Focus();
+        }
+
+        private void PhoneNumberTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(PhoneNumberText.Text) && PhoneNumberText.Text.Length > 0)
+            {
+                PhoneNumberText.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PhoneNumberText.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void CityText_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CityTxt.Focus();
+        }
+
+        private void CityTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(CityText.Text) && CityText.Text.Length > 0)
+            {
+                CityText.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                CityText.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void StreetText_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            StreetTxt.Focus();
+        }
+
+        private void StreetTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(StreetText.Text) && StreetText.Text.Length > 0)
+            {
+                StreetText.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                StreetText.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void HouseNumberText_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            HouseNumberTxt.Focus();
+        }
+
+        private void HouseNumberTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(HouseNumberText.Text) && HouseNumberText.Text.Length > 0)
+            {
+                HouseNumberText.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                HouseNumberText.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void PostalCodeText_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PostalCodeTxt.Focus();
+        }
+
+        private void PostalCodeTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(PostalCodeText.Text) && PostalCodeText.Text.Length > 0)
+            {
+                PostalCodeText.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PostalCodeText.Visibility = Visibility.Visible;
+            }
+        }
+
+        #endregion
     }
 }

@@ -43,7 +43,7 @@
 
         <!--#endregion-->
 
-        <!--#region Account-->
+        <!--#region Main-->
 
         <Border Grid.Row="1" CornerRadius="0 0 10 10" Background="#DFFBF0" >
             <Grid>
@@ -51,7 +51,8 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-
+                
+                <!--region History -->
                 <StackPanel Grid.Column="0">
                     <TextBlock Style="{StaticResource titleText}" Margin="10" FontSize="30" Foreground="{StaticResource MainColorBrush}" Text="History"/>
                     <ListView x:Name="ProductsListView" Margin="20 20 20 200" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
@@ -72,7 +73,10 @@
                         </ListView.View>
                     </ListView>
                 </StackPanel>
-
+                <Button Content="Clear History" Height="50" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Style="{StaticResource mainloginButtons}"/>
+                <!--#endregion-->
+                
+                <!--region Details -->
                 <Border  Background="White" Grid.Column="1" Margin="20" CornerRadius="30">
                     <StackPanel>
 
@@ -88,7 +92,8 @@
                     </StackPanel>
                 </Border>
 
-                <Button Content="Clear History" Height="50" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Style="{StaticResource mainloginButtons}"/>
+                <!--endregion-->
+
             </Grid>
             
 

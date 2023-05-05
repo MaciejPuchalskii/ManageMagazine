@@ -9,7 +9,7 @@
         ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent" MouseDown="Window_MouseDown">
     <Grid>
 
-        <!--#region  Row Definitions-->
+        <!--#region All Window Row Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -44,7 +44,7 @@
 
         <!--#endregion-->
 
-        <!--#region Home-->
+        <!--#region Main-->
 
         <Border Grid.Row="1" CornerRadius="0 0 10 10" Background="#DFFBF0" >
             <Grid>
@@ -57,7 +57,7 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-        
+
                 <!--#region SALE-->
                 <Border Grid.Row="0" Grid.Column="0" Margin="30" Background="#90f5cf" CornerRadius="20" BorderThickness="0">
                     <Grid>
@@ -84,50 +84,42 @@
                     </Grid>
                 </Border>
                 <!--#endregion-->
-                
+
                 <!--#region Graph-->
                 <Border   Background="White"  Margin="30" Grid.Row="1" Grid.Column="0"  CornerRadius="20" BorderThickness="0">
                     <StackPanel VerticalAlignment="Center" >
                         <TextBlock HorizontalAlignment="Center"  Margin="0 0 0 10"  Text="Wykres" Style="{StaticResource titleText}" TextAlignment="Center" Foreground="Black"/>
-                   
+
                     </StackPanel>
                 </Border>
                 <!--#endregion-->
-                
-                <Border Grid.Row="1" Grid.Column="0"  CornerRadius="20" BorderThickness="0">
-                    <StackPanel VerticalAlignment="Center">
 
-                    </StackPanel>
-                </Border>
-                
+                <!--#region Last Items-->
                 <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="30" Background="#90f5cf" CornerRadius="20" BorderThickness="0">
                     <StackPanel>
-                    <TextBlock Text="LAST ITEMS" Margin="20" Style="{StaticResource titleText}" Foreground="White"/>
-                    <ListView x:Name="LastProductsListView" Margin="20 20 20 100" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
-                        <ListView.View>
-                            <GridView>
+                        <TextBlock Text="LAST ITEMS" Margin="20" Style="{StaticResource titleText}" Foreground="White"/>
+                        <ListView x:Name="LastProductsListView" Margin="20 20 20 100" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
+                            <ListView.View>
+                                <GridView>
 
-                                <GridView.ColumnHeaderContainerStyle>
-                                    <Style TargetType="{x:Type GridViewColumnHeader}">
-                                        <Setter Property="IsEnabled" Value="False"/>
-                                    </Style>
-                                </GridView.ColumnHeaderContainerStyle>
+                                    <GridView.ColumnHeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </Style>
+                                    </GridView.ColumnHeaderContainerStyle>
 
-                                <GridViewColumn Width="80" Header="ID" DisplayMemberBinding="{Binding Id}" />
-                                <GridViewColumn Width="160"  Header="Name" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Width="140" Header="Quantity" DisplayMemberBinding="{Binding Quantity}" />
+                                    <GridViewColumn Width="80" Header="ID" DisplayMemberBinding="{Binding Id}" />
+                                    <GridViewColumn Width="160"  Header="Name" DisplayMemberBinding="{Binding Name}" />
+                                    <GridViewColumn Width="140" Header="Quantity" DisplayMemberBinding="{Binding Quantity}" />
 
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                        
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
                     </StackPanel>
                 </Border>
-
+                <!--#endregion-->
             </Grid>
-
-            
-
         </Border>
 
         <!--#endregion-->
