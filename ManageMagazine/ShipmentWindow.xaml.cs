@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +19,68 @@ namespace ManageMagazine
 
     public partial class ShipmentWindow : Window
     {
+        List<Order> orderList;
+        Database databaseObject;
         public ShipmentWindow() 
         {
             InitializeComponent();
+            databaseObject = new Database();
+
+            orderList = GetOrdersDB();
+            OrdersListView.ItemsSource = orderList;
         }
 
+        private List<Order> GetOrdersDB()
+        {
+            List<Order> orders = new List<Order>();
+            databaseObject.OpenConnection();
+            string query = "Select * from Orders";
+            SQLiteCommand myCommand = new SQLiteCommand(query, databaseObject.myConnection);
+
+            SQLiteDataReader result = myCommand.ExecuteReader();
+
+            if (result.HasRows)
+            {
+                while (result.Read())
+                {
+                    orders.Add(new Order(Convert.ToInt32(result["ID"]),
+                                                                Convert.ToInt32(result["CustomerID"]),
+                                                                Convert.ToDouble(result["TotalPrice"])));
+
+                }
+            }
+
+
+           foreach(Order order in orders)
+            {
+                string selectQuery = "Select oi.OrderId, oi.RecordID,oi.ProductID, oi.Quantity, oi.Price, p.ID, p.Name, p.Manufacturer, p.PurchasePrice, p.SalePrice, p.Quantity as QuantityP from OrderItems oi JOIN Products p ON p.ID=oi.ProductID where oi.OrderID=@id;";
+                SQLiteCommand my2Command = new SQLiteCommand(selectQuery, databaseObject.myConnection);
+
+                my2Command.Parameters.AddWithValue("@id",order.OrderId);
+
+
+               SQLiteDataReader result2 = my2Command.ExecuteReader();
+
+                if (result2.HasRows)
+                {
+                
+                    while (result2.Read())
+                    {
+                       // order.OrderItems.Add(new OrderItem(Convert.ToInt32(result2["oi.OrderID"]), Convert.ToInt32(result2["oi.Quantity"]), new Product(Convert.ToInt32(result2["p.ID"]), Convert.ToString(result2["p.Name"]), Convert.ToString(result2["p.Manufacturer"]), Convert.ToDouble(result2["p.PurchasePrice"]), Convert.ToDouble(result2["p.SalePrice"]), Convert.ToInt32(result2["p.Quantity"]))));
+                        order.OrderItems.Add(new OrderItem(Convert.ToInt32(result2["OrderID"]), Convert.ToInt32(result2["Quantity"]), new Product(Convert.ToInt32(result2["ID"]), Convert.ToString(result2["Name"]), Convert.ToString(result2["Manufacturer"]), Convert.ToDouble(result2["PurchasePrice"]), Convert.ToDouble(result2["SalePrice"]), Convert.ToInt32(result2["QuantityP"]))));
+                    }
+                }
+
+            }
+
+
+            databaseObject.CloseConnection();
+            return orders;
+        }
+        private void OrdersListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
 
         #region ClosingMinimalizingApp
         /* Closing, Minimalizing, Login Navigation buttons functionality*/

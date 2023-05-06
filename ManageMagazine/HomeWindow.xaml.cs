@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +18,44 @@ namespace ManageMagazine
 
     public partial class HomeWindow : Window
     {
+        List<Product> lastProductList;
+        Database databaseObject;
         public HomeWindow()
         {
             InitializeComponent();
-            var lastProductList = productList.Where(p => p.Quantity < 3).OrderByDescending(p => p.Quantity).ToList();
-            LastProductsListView.ItemsSource = lastProductList;
+            databaseObject = new Database();
+            lastProductList = new List<Product>() { };
+            CheckingLastProducts();
         }
+        private void GetDataFromDB()
+        {
+            databaseObject.OpenConnection();
+            string query = "Select * from products Where Quantity<5 Order BY Quantity ASC";
+            SQLiteCommand myCommand = new SQLiteCommand(query, databaseObject.myConnection);
 
+            SQLiteDataReader result = myCommand.ExecuteReader();
+
+            if (result.HasRows)
+            {
+                while (result.Read())
+                {
+                    lastProductList.Add(new Product(Convert.ToInt32(result["id"]),
+                                                                result["Name"].ToString(),
+                                                                result["Manufacturer"].ToString(),
+                                                                Convert.ToDouble(result["PurchasePrice"]),
+                                                                Convert.ToDouble(result["SalePrice"]),
+                                                                Convert.ToInt32(result["Quantity"])));
+                }
+            }
+
+            databaseObject.CloseConnection();
+        }
+        private void CheckingLastProducts()
+        {
+            GetDataFromDB(); 
+            LastProductsListView.ItemsSource = lastProductList;
+
+        }
 
         #region ClosingMinimalizingApp
         /* Closing, Minimalizing, Login Navigation buttons functionality*/
@@ -65,17 +97,7 @@ namespace ManageMagazine
 
         
 
-        List<Product> productList = new List<Product>()
-        {
-            new Product() { Id = 1, Name = "Blue Shark T-Shirt", Manufacturer = "Adidas",  PurchasePrice = 12.1 , SalePrice = 50.2 , Quantity = 2},
-            new Product() { Id = 2, Name = "Red Crab T-Shirt", Manufacturer = "Nike",  PurchasePrice = 11.1 , SalePrice = 30.2 , Quantity = 10},
-            new Product() { Id = 3, Name = "Green Lizard T-Shirt", Manufacturer = "Hias",  PurchasePrice = 5.1 , SalePrice = 20.2 , Quantity = 3},
-            new Product() { Id = 4, Name = "Black Hoodie", Manufacturer = "Adidas",  PurchasePrice = 16.1 , SalePrice = 78.2 , Quantity = 15},
-            new Product() { Id = 5, Name = "Green Lizard T-Shirt", Manufacturer = "Hias",  PurchasePrice = 5.1 , SalePrice = 20.2 , Quantity = 1},
-            new Product() { Id = 6, Name = "Leather Belt", Manufacturer = "Lancerto",  PurchasePrice = 15.1 , SalePrice = 55.2 , Quantity = 4},
-
-        };
-
+       
         #endregion
 
     }

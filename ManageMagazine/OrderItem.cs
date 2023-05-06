@@ -9,7 +9,7 @@ namespace ManageMagazine
 {
     public class OrderItem
     {
-        public static int OrderItemId { get; set;}
+        public static int OrderItemId { get; set; }
 
         public static int NextID = 1;
 
@@ -23,14 +23,14 @@ namespace ManageMagazine
         public string DisplayInfo => $"{Product.Name}" + $" : {Product.Manufacturer}" + $" : {Quantity}" + $" : {Product.SalePrice}" + "$";
 
 
-        public OrderItem(int orderID, int quantity,Product product)
+        public OrderItem(int orderID, int quantity, Product product)
         {
             OrderItemId = NextID;
-            NextID++; 
+            NextID++;
             OrderID = orderID;
             ProductID = product.Id;
             Quantity = quantity;
-            Price = product.SalePrice*quantity;
+            Price = product.SalePrice * quantity;
             Product = product;
         }
 

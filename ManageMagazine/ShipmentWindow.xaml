@@ -54,8 +54,7 @@
                 
                 <!--region History -->
                 <StackPanel Grid.Column="0">
-                    <TextBlock Style="{StaticResource titleText}" Margin="10" FontSize="30" Foreground="{StaticResource MainColorBrush}" Text="History"/>
-                    <ListView x:Name="ProductsListView" Margin="20 20 20 200" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
+                    <ListView x:Name="OrdersListView" SelectionChanged="OrdersListView_SelectionChanged" Margin="20 20 20 200" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
                         <ListView.View>
                             <GridView>
 
@@ -65,15 +64,15 @@
                                     </Style>
                                 </GridView.ColumnHeaderContainerStyle>
 
-                                <GridViewColumn Width="150" Header="ID" DisplayMemberBinding="{Binding Id}" />
-                                <GridViewColumn Width="150"  Header="Buyer" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Width="150" Header="Price" DisplayMemberBinding="{Binding Manufacturer}" />
+                                <GridViewColumn Width="40" Header="ID" DisplayMemberBinding="{Binding OrderId}" />
+                                <GridViewColumn Width="150"  Header="Customer ID" DisplayMemberBinding="{Binding CustomerId}" />
+                                <GridViewColumn Width="150"  Header="Products Quantity" DisplayMemberBinding="{Binding TotalQuantity}" />
+                                <GridViewColumn Width="150" Header="Sum" DisplayMemberBinding="{Binding Sum}" />
                             
                             </GridView>
                         </ListView.View>
                     </ListView>
                 </StackPanel>
-                <Button Content="Clear History" Height="50" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Style="{StaticResource mainloginButtons}"/>
                 <!--#endregion-->
                 
                 <!--region Details -->

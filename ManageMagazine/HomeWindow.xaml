@@ -97,8 +97,8 @@
                 <!--#region Last Items-->
                 <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="30" Background="#90f5cf" CornerRadius="20" BorderThickness="0">
                     <StackPanel>
-                        <TextBlock Text="LAST ITEMS" Margin="20" Style="{StaticResource titleText}" Foreground="White"/>
-                        <ListView x:Name="LastProductsListView" Margin="20 20 20 100" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
+                        <TextBlock Text="LAST ITEMS" Margin="20 0 10 0" Style="{StaticResource titleText}" Foreground="White"/>
+                        <ListView x:Name="LastProductsListView" Height="460" VerticalAlignment="Top" Margin="20 0 20 10" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
                             <ListView.View>
                                 <GridView>
 

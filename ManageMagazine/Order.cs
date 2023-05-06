@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +8,30 @@ namespace ManageMagazine
 {
     public class Order
     {
-        public static int OrderId { get; set; }
+        public int OrderId { get; set; }
 
         public int CustomerId { get; set; }
 
         public List<OrderItem> OrderItems { get; set; }
+
+        public int TotalQuantity
+        {
+            get
+            {
+                int qty = 0;
+                foreach (OrderItem o in OrderItems)
+                {
+                    qty += o.Quantity;
+                }
+                return qty;
+            }
+            set
+            {
+
+            }
+           
+        }
+       
 
         public double Sum 
         {
@@ -34,6 +53,15 @@ namespace ManageMagazine
         public Order()
         {
             OrderItems = new List<OrderItem>();
+        }
+
+        public Order(int id, int customerId, double sum)
+        {
+            OrderId = id;
+            CustomerId = customerId;
+            Sum = sum;
+            OrderItems = new List<OrderItem>();
+
         }
     }
 }

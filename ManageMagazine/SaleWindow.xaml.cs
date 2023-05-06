@@ -151,37 +151,38 @@ namespace ManageMagazine
         {
             MainGrid.IsEnabled = isEnabled;
         }
-        
+
 
 
 
         private void AddToCart(object sender, RoutedEventArgs e)
         {
-            if(QuantityTextBox.Text.Length > 0)
+            if (QuantityTextBox.Text.Length > 0)
             {
                 var selectedItem = (Product)ProductListView.SelectedItem;
                 int quantity = Convert.ToInt32(QuantityTextBox.Text);
-                order.OrderItems.Add(new OrderItem(Order.OrderId, quantity, selectedItem));
-
+                databaseObject.OpenConnection();
+                order.OrderItems.Add(new OrderItem(databaseObject.GetLastId("Orders"), quantity, selectedItem));
+                databaseObject.CloseConnection();
 
                 RefreshListView(CartListView);
                 CartListView.ItemsSource = order.OrderItems;
 
-                
-                
-                Total.Text = Convert.ToString(order.Sum) + " $"; 
+
+
+                Total.Text = Convert.ToString(order.Sum) + " $";
 
             }
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
-            if(CartListView.SelectedIndex!=null)
+            if (CartListView.SelectedIndex != null)
             {
                 int index = CartListView.SelectedIndex;
                 order.OrderItems.RemoveAt(index);
                 RefreshListView(CartListView);
-                CartListView.ItemsSource= order.OrderItems;
+                CartListView.ItemsSource = order.OrderItems;
                 Total.Text = Convert.ToString(order.Sum) + " $";
 
 
@@ -196,7 +197,7 @@ namespace ManageMagazine
             CustomerComboBox.SelectedItem = null;
             ProductListView.SelectedItem = null;
             CartListView.ItemsSource = null;
-            QuantityTextBox.Text=null;
+            QuantityTextBox.Text = null;
 
 
 
@@ -209,7 +210,7 @@ namespace ManageMagazine
         private void OrderButton_Click(object sender, RoutedEventArgs e)
         {
             bool weHaveEveryting = true;
-            List<int> productsId= new List<int>();
+            List<int> productsId = new List<int>();
 
             foreach (OrderItem orderItem in order.OrderItems)
             {
@@ -220,56 +221,56 @@ namespace ManageMagazine
                 }
             }
 
-            
-                databaseObject.OpenConnection();
-                int NextOrderId = databaseObject.GetLastId("Orders") + 1;
-                if (order.OrderItems.Count > 0 && CustomerComboBox.SelectedItem != null)
+
+            databaseObject.OpenConnection();
+            int NextOrderId = databaseObject.GetLastId("Orders") + 1;
+            if (order.OrderItems.Count > 0 && CustomerComboBox.SelectedItem != null)
+            {
+
+                if (weHaveEveryting)
                 {
-
-                    if (weHaveEveryting)
+                    try
                     {
-                        try
+                        string query = "INSERT INTO Orders ('ID','CustomerID','TotalPrice') values (@ID,@CustomerID,@TotalPrice);";
+
+                        SQLiteCommand orderCommand = new SQLiteCommand(query, databaseObject.myConnection);
+
+                        var customer = (Customer)CustomerComboBox.SelectedItem;
+
+                        int customerId = customer.Id;
+
+
+
+
+                        orderCommand.Parameters.AddWithValue("@ID", NextOrderId);
+                        orderCommand.Parameters.AddWithValue("@CustomerID", customerId);
+                        orderCommand.Parameters.AddWithValue("@TotalPrice", order.Sum);
+
+                        orderCommand.ExecuteNonQuery();
+
+                        int recordId = 1;
+
+                        foreach (OrderItem item in order.OrderItems)
                         {
-                            string query = "INSERT INTO Orders ('ID','CustomerID','TotalPrice') values (@ID,@CustomerID,@TotalPrice);";
-
-                            SQLiteCommand orderCommand = new SQLiteCommand(query, databaseObject.myConnection);
-
-                            var customer = (Customer)CustomerComboBox.SelectedItem;
-
-                            int customerId = customer.Id;
-
-
-
-
-                            orderCommand.Parameters.AddWithValue("@ID", NextOrderId);
-                            orderCommand.Parameters.AddWithValue("@CustomerID", customerId);
-                            orderCommand.Parameters.AddWithValue("@TotalPrice", order.Sum);
-
-                            orderCommand.ExecuteNonQuery();
-
-                            int recordId = 1;
-
-                            foreach (OrderItem item in order.OrderItems)
-                            {
-                                string insertOrderItem = "INSERT INTO OrderItems ('OrderID','RecordId','ProductID','Quantity','Price') VALUES (@OrderID,@RecordId,@ProductID,@Quantity,@Price);";
-                                string updateQuantity = "UPDATE Products SET Quantity = Quantity-@selling WHERE Id=@ProductID";
-                                SQLiteCommand itemsCommand = new SQLiteCommand(insertOrderItem, databaseObject.myConnection);
-                                SQLiteCommand updateComand = new SQLiteCommand(updateQuantity, databaseObject.myConnection);
-                                itemsCommand.Parameters.AddWithValue("@OrderID", NextOrderId);
-                                itemsCommand.Parameters.AddWithValue("@RecordId", recordId);
-                                itemsCommand.Parameters.AddWithValue("@ProductID", item.ProductID);
-                                itemsCommand.Parameters.AddWithValue("@Quantity", item.Quantity);
-                                itemsCommand.Parameters.AddWithValue("@Price", item.Price);
+                            string insertOrderItem = "INSERT INTO OrderItems ('OrderID','RecordId','ProductID','Quantity','Price') VALUES (@OrderID,@RecordId,@ProductID,@Quantity,@Price);";
+                            string updateQuantity = "UPDATE Products SET Quantity = Quantity-@selling WHERE Id=@ProductID";
+                            SQLiteCommand itemsCommand = new SQLiteCommand(insertOrderItem, databaseObject.myConnection);
+                            SQLiteCommand updateComand = new SQLiteCommand(updateQuantity, databaseObject.myConnection);
+                            itemsCommand.Parameters.AddWithValue("@OrderID", NextOrderId);
+                            itemsCommand.Parameters.AddWithValue("@RecordId", recordId);
+                            itemsCommand.Parameters.AddWithValue("@ProductID", item.ProductID);
+                            itemsCommand.Parameters.AddWithValue("@Quantity", item.Quantity);
+                            itemsCommand.Parameters.AddWithValue("@Price", item.Price);
 
 
-                                updateComand.Parameters.AddWithValue("@selling", item.Quantity);
-                                updateComand.Parameters.AddWithValue("@ProductID", item.ProductID);
+                            updateComand.Parameters.AddWithValue("@selling", item.Quantity);
+                            updateComand.Parameters.AddWithValue("@ProductID", item.ProductID);
 
-                                itemsCommand.ExecuteNonQuery();
+                            itemsCommand.ExecuteNonQuery();
 
-                                updateComand.ExecuteNonQuery();
-                                recordId++;
-                            }
+                            updateComand.ExecuteNonQuery();
+                            recordId++;
+                        }
 
 
                         InfoWindow window = new InfoWindow("Order confirmed");
@@ -277,39 +278,39 @@ namespace ManageMagazine
 
                         RefreshLists();
                     }
-                        catch (Exception)
-                        {
-                            InfoWindow window = new InfoWindow("Order wasn't added");
-                            window.ShowDialog();
-                        }
-                        databaseObject.CloseConnection();
-                    }
-                    else
+                    catch (Exception)
                     {
-                        string message = "Pproducts with that IDs can't be send check stock: ";
-                        foreach (int i in productsId)
-                        {
-                            message += i.ToString() + ",";
-                        }
-
-                        InfoWindow window = new InfoWindow(message);
+                        InfoWindow window = new InfoWindow("Order wasn't added");
                         window.ShowDialog();
                     }
+                    databaseObject.CloseConnection();
                 }
                 else
                 {
-                    
-                    InfoWindow window = new InfoWindow("Add more products or check if customer was chosen");
+                    string message = "Pproducts with that IDs can't be send check stock: ";
+                    foreach (int i in productsId)
+                    {
+                        message += i.ToString() + ",";
+                    }
+
+                    InfoWindow window = new InfoWindow(message);
                     window.ShowDialog();
                 }
             }
-        
+            else
+            {
+
+                InfoWindow window = new InfoWindow("Add more products or check if customer was chosen");
+                window.ShowDialog();
+            }
+        }
 
 
 
-        
 
-       
+
+
+
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = SearchBox.Text;
