@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -77,8 +78,33 @@ namespace ManageMagazine
             databaseObject.CloseConnection();
             return orders;
         }
+
+
         private void OrdersListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var selectedOrder = (Order)OrdersListView.SelectedItem;
+
+            databaseObject.OpenConnection();
+            string selectedQuery = "SELECT * FROM Customers Where ID = @id";
+            SQLiteCommand myCommand = new SQLiteCommand(selectedQuery, databaseObject.myConnection);
+
+            myCommand.Parameters.AddWithValue("@id", selectedOrder.CustomerId);
+
+            SQLiteDataReader result = myCommand.ExecuteReader();
+
+            if(result.Read())
+            {
+                NameText.Text = Convert.ToString(result["FirstName"]) + " " + Convert.ToString(result["LastName"]);
+                CityAndPostText.Text = Convert.ToString(result["City"]) + " " + Convert.ToString(result["PostalCode"]);
+                StreeTHouseNumberText.Text = Convert.ToString(result["Street"]) +" "+ Convert.ToString(result["HouseNumber"]);
+                TotalSumText.Text ="Sum: " + selectedOrder.Sum.ToString();
+                databaseObject.CloseConnection();
+
+            }
+
+            OrderItemsListView.ItemsSource = null;
+            OrderItemsListView.ItemsSource = selectedOrder.OrderItems;
+
 
         }
 

@@ -80,14 +80,29 @@
                     <StackPanel>
 
                         <TextBlock Text="Details" Style="{StaticResource titleText}" Margin="10" FontSize="20" HorizontalAlignment="Center" Foreground="{StaticResource MainColorBrush}"/>
-                        <TextBlock Text="Sale ID: 1" Style="{StaticResource titleText}" Margin="10" FontSize="20" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
-                        <TextBlock Text="Buyer: Adam Kwiatkowski" Style="{StaticResource titleText}" Margin="10" FontSize="20" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
-                        <TextBlock Text="Address: Opole | Niemodlińska | 12/2" Style="{StaticResource titleText}" Margin="10" FontSize="20" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
+                        <TextBlock x:Name="NameText" Text="Uknown" Style="{StaticResource titleText}" Margin="5" FontSize="15" HorizontalAlignment="Right" Foreground="{StaticResource MainColorBrush}"/>
+                        <TextBlock x:Name="CityAndPostText" Text="Uknown" Style="{StaticResource titleText}" Margin="5" FontSize="15" HorizontalAlignment="Right" Foreground="{StaticResource MainColorBrush}"/>
+                        <TextBlock x:Name="StreeTHouseNumberText" Text="Uknown" Style="{StaticResource titleText}" Margin="5" FontSize="15" HorizontalAlignment="Right" Foreground="{StaticResource MainColorBrush}"/>
                         <TextBlock Text="Items:" Style="{StaticResource titleText}" Margin="10" FontSize="20" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
-                        <TextBlock Text="- Blue Shirt x2" Style="{StaticResource normalText}" Margin="10" FontSize="15" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
-                        <TextBlock Text="- Red Shirt x4" Style="{StaticResource titleText}" Margin="10" FontSize="15" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
-                        <TextBlock Text="- White Shirt x1" Style="{StaticResource titleText}" Margin="10" FontSize="15" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
-                        <TextBlock Text="SUM:100$" Style="{StaticResource titleText}" Margin="10 10 0 0" FontSize="20" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
+                        <ListView x:Name="OrderItemsListView" Height="300" Margin="20 20 20 0" BorderThickness="0" Background="#DFFBF0" HorizontalAlignment="Center" BorderBrush="Black">
+                            <ListView.View>
+                                <GridView>
+
+                                    <GridView.ColumnHeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </Style>
+                                    </GridView.ColumnHeaderContainerStyle>
+
+                                    <GridViewColumn Width="150"  Header="Name" DisplayMemberBinding="{Binding Product.Name}" />
+                                    <GridViewColumn Width="100"  Header="Manufcaturer" DisplayMemberBinding="{Binding Product.Manufacturer}" />
+                                    <GridViewColumn Width="100" Header="Quantity" DisplayMemberBinding="{Binding Quantity}" />
+                                    <GridViewColumn Width="100"  Header="Price" DisplayMemberBinding="{Binding Product.SalePrice}" />
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <TextBlock x:Name="TotalSumText" Text="SUM:Uknown" Style="{StaticResource titleText}" Margin="10 0 0 0" FontSize="20" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>
                     </StackPanel>
                 </Border>
 
