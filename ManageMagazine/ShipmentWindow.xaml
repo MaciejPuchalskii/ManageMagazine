@@ -81,6 +81,7 @@
 
                         <TextBlock Text="Details" Style="{StaticResource titleText}" Margin="10" FontSize="20" HorizontalAlignment="Center" Foreground="{StaticResource MainColorBrush}"/>
                         <TextBlock x:Name="NameText" Text="Uknown" Style="{StaticResource titleText}" Margin="5" FontSize="15" HorizontalAlignment="Right" Foreground="{StaticResource MainColorBrush}"/>
+                        <TextBlock x:Name="PhoneNumberText" Text="Uknown" Style="{StaticResource titleText}" Margin="5" FontSize="15" HorizontalAlignment="Right" Foreground="{StaticResource MainColorBrush}"/>
                         <TextBlock x:Name="CityAndPostText" Text="Uknown" Style="{StaticResource titleText}" Margin="5" FontSize="15" HorizontalAlignment="Right" Foreground="{StaticResource MainColorBrush}"/>
                         <TextBlock x:Name="StreeTHouseNumberText" Text="Uknown" Style="{StaticResource titleText}" Margin="5" FontSize="15" HorizontalAlignment="Right" Foreground="{StaticResource MainColorBrush}"/>
                         <TextBlock Text="Items:" Style="{StaticResource titleText}" Margin="10" FontSize="20" HorizontalAlignment="Left" Foreground="{StaticResource MainColorBrush}"/>

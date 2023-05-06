@@ -69,14 +69,10 @@
                             <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"  Height="40" >
                                 <TextBlock  Text="SALE" Foreground="White" FontSize="30" Style="{StaticResource normalText}"/>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="70 0" Height="20">
-                                <RadioButton Margin="10 0 10 0" Content="LAST 7 DAYS"/>
-                                <RadioButton Margin="10 0 10 0" Content="LAST 30 DAYS"/>
-                                <RadioButton Margin="10 0 10 0" Content="LAST 365 DAYS"/>
-                            </StackPanel>
+                            
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Row="1">
-                            <TextBlock Text="Turnover: 10 000$" Style="{StaticResource normalText}" Margin="10 10 0 0" FontSize="25" HorizontalAlignment="Left"  Foreground="White"/>
+                            <TextBlock Text="Turnover:" Style="{StaticResource normalText}" Margin="10 10 0 0" FontSize="25" HorizontalAlignment="Left"  Foreground="White"/>
                             <TextBlock Text="Cost: 3 000$" Style="{StaticResource normalText}" Margin="10 10 0 0"  FontSize="25" HorizontalAlignment="Left"  Foreground="White"/>
                             <TextBlock Text="Taxes: 400$" Style="{StaticResource normalText}" Margin="10 10 0 0"  FontSize="25" HorizontalAlignment="Left"  Foreground="White"/>
                             <TextBlock Text="Profit: 6 600$" Style="{StaticResource normalText}" Margin="10 10 0 0"  FontSize="25" HorizontalAlignment="Left"  Foreground="White"/>

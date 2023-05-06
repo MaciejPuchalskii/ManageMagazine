@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManageMagazine"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1100" WindowStyle="None" WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="700" Width="800" WindowStyle="None" WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent" MouseDown="Window_MouseDown">
     <Grid>
 
@@ -56,13 +56,13 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <!--<ColumnDefinition/>-->
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                     
-                <Button Click="HomeNavigation" Grid.RowSpan="2" Grid.Column="1" Style="{StaticResource MenuButton}">
+                <!--<Button Click="HomeNavigation" Grid.RowSpan="2" Grid.Column="1" Style="{StaticResource MenuButton}">
                     <Label Content="&#xf015;" Style="{StaticResource MenuIconsLabel}"/>
-                </Button>
+                </Button>-->
                 
                 <Button Click="SalesNavigation" Grid.Row="0" Grid.ColumnSpan="1" Style="{StaticResource MenuButton}">
                     <Label Content="&#xe529;" Style="{StaticResource MenuIconsLabel}"/>

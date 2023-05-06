@@ -27,6 +27,12 @@ namespace ManageMagazine
             lastProductList = new List<Product>() { };
             CheckingLastProducts();
         }
+
+        private void GetInfo()
+        {
+
+        }
+
         private void GetDataFromDB()
         {
             databaseObject.OpenConnection();

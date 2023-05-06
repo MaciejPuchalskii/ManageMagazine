@@ -97,6 +97,7 @@ namespace ManageMagazine
                 NameText.Text = Convert.ToString(result["FirstName"]) + " " + Convert.ToString(result["LastName"]);
                 CityAndPostText.Text = Convert.ToString(result["City"]) + " " + Convert.ToString(result["PostalCode"]);
                 StreeTHouseNumberText.Text = Convert.ToString(result["Street"]) +" "+ Convert.ToString(result["HouseNumber"]);
+                PhoneNumberText.Text = Convert.ToString(result["PhoneNumber"]);
                 TotalSumText.Text ="Sum: " + selectedOrder.Sum.ToString();
                 databaseObject.CloseConnection();
 
